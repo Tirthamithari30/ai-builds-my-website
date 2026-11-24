@@ -35,4 +35,14 @@ return [
         ],
     ],
 
+    'gemini' => [
+        'api_key' => env('GEMINI_API_KEY'),
+        'model' => env('GEMINI_MODEL', 'gemini-2.5-flash'),
+    ],
+
+    'search' => [
+        'provider' => env('SEARCH_PROVIDER', 'serper'),
+        'api_key' => env('SEARCH_API_KEY'),
+    ],
+
 ];

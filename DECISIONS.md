@@ -148,7 +148,19 @@ Implement multi-layer defensive hardening across authentication rate limiting, S
 
 ---
 
-## 11. Summary
+## 11. Production Configuration & Infrastructure Operations (Phase 11)
+
+### Decision:
+Structure the application for deterministic production deployment with config caching preservation, daily log rotation, standard security headers, automated database backups, disaster recovery, and zero-downtime deployment workflows.
+
+### Rationale:
+1. **Config Cache Preservation**: When `php artisan config:cache` is executed in production, Laravel halts runtime `env()` calls outside `config/`. By explicitly registering `services.gemini` and `services.search` keys inside `config/services.php`, Gemini AI and search credentials are fully preserved after configuration compilation.
+2. **Standardized Security Headers**: The `SecurityHeaders` middleware injects `X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`, `X-XSS-Protection: 1; mode=block`, `Referrer-Policy: strict-origin-when-cross-origin`, and `Permissions-Policy`, shielding both dashboard and published sites from clickjacking and MIME confusion attacks.
+3. **Automated Disaster Recovery**: Provided shell scripts (`backup-db.sh`, `restore-db.sh`, `deploy.sh`) ensure point-in-time recovery and zero-downtime deployments without relying on manual database exports.
+
+---
+
+## 12. Summary
 
 Every architectural decision in **AI Builds My Website** was guided by two overarching criteria:
 1. **Authenticity & Integrity**: The system must never hallucinate, invent claims, or publish unverified contradictions.

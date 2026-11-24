@@ -47,7 +47,8 @@ The application autonomously transforms raw business details, uploaded documents
    - Strict privacy enforcement: unpublished drafts immediately return an HTTP `404 Not Found` to anonymous visitors.
 6. **Defensive Security & 100% Automated Test Coverage:**
    - Multi-layer security: authentication rate limiting (5 attempts/min), CSS injection sanitization, IDOR prevention across all models, and 100% parameterized queries.
-   - **115 automated tests** with **623 assertions**, all passing (100% green).
+   - Production readiness: automated daily MySQL backup script (`scripts/backup-db.sh`), disaster recovery script (`scripts/restore-db.sh`), zero-downtime deployment script (`scripts/deploy.sh`), and comprehensive deployment documentation (`DEPLOYMENT.md`).
+   - **124 automated tests** with **679 assertions**, all passing (100% green).
 
 ---
 
