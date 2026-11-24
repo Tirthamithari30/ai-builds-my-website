@@ -28,6 +28,7 @@ class Business extends Model
         'operating_hours',
         'products',
         'services',
+        'additional_info',
         'social_links',
         'status',
     ];

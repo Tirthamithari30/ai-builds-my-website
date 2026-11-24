@@ -32,12 +32,20 @@
             </div>
 
             <div class="flex items-center gap-4">
-                <a href="#architecture" class="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors">Architecture</a>
-                <a href="#services" class="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors">Services</a>
-                <a href="#verification" class="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors">Verification</a>
-                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">
-                    Phase 1 Ready
-                </span>
+                <a href="#architecture" class="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors hidden sm:inline-block">Architecture</a>
+                <a href="#services" class="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors hidden sm:inline-block">Services</a>
+                @auth
+                    <a href="{{ route('dashboard') }}" class="inline-flex items-center px-4 py-2 rounded-xl text-xs font-semibold bg-blue-600 text-white hover:bg-blue-700 shadow-xs transition-colors">
+                        Go to Dashboard
+                    </a>
+                @else
+                    <a href="{{ route('login') }}" class="text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors">
+                        Sign In
+                    </a>
+                    <a href="{{ route('register') }}" class="inline-flex items-center px-4 py-2 rounded-xl text-xs font-semibold bg-blue-600 text-white hover:bg-blue-700 shadow-xs transition-colors">
+                        Get Started
+                    </a>
+                @endauth
             </div>
         </div>
     </header>
@@ -61,6 +69,23 @@
                     <p class="mt-6 text-lg text-slate-600 leading-relaxed">
                         Never invent business facts. Our multi-stage verification engine extracts data from PDFs, online sources, and listings, detects conflicts, requires user confirmation, and compiles verified websites into tailored design presets.
                     </p>
+
+                    <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+                        @auth
+                            <a href="{{ route('dashboard') }}" class="w-full sm:w-auto px-6 py-3 rounded-xl text-sm font-semibold bg-blue-600 text-white hover:bg-blue-700 shadow-xs transition-colors flex items-center justify-center gap-2">
+                                <span>Go to Dashboard</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                            </a>
+                        @else
+                            <a href="{{ route('register') }}" class="w-full sm:w-auto px-6 py-3 rounded-xl text-sm font-semibold bg-blue-600 text-white hover:bg-blue-700 shadow-xs transition-colors flex items-center justify-center gap-2">
+                                <span>Get Started Free</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                            </a>
+                            <a href="{{ route('login') }}" class="w-full sm:w-auto px-6 py-3 rounded-xl text-sm font-semibold bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 transition-colors">
+                                Sign In
+                            </a>
+                        @endauth
+                    </div>
 
                     <!-- Real Environment & Architectural Metrics -->
                     <div class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 text-left">
