@@ -676,6 +676,12 @@ PROMPT;
             case 'products':
                 $items = [];
                 $rawItems = $verifiedFacts[$type] ?? ($business->{$type} ?? null);
+                if (is_string($rawItems)) {
+                    $decoded = json_decode($rawItems, true);
+                    if (is_array($decoded)) {
+                        $rawItems = $decoded;
+                    }
+                }
 
                 if (is_array($rawItems) && !empty($rawItems)) {
                     foreach (array_slice($rawItems, 0, 6) as $item) {

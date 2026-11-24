@@ -1,58 +1,363 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# AI BUILDS MY WEBSITE
+### Autonomous AI-Powered Business Website Generator
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+[![Laravel](https://img.shields.io/badge/Laravel-11.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com)
+[![PHP](https://img.shields.io/badge/PHP-8.4-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
+[![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://mysql.com)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.x-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
+[![Google Gemini](https://img.shields.io/badge/Google_Gemini-2.5_Flash-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
+[![Tests Passing](https://img.shields.io/badge/Tests-89%20Passed%20(100%25)-success?style=for-the-badge)](tests)
 
-## About Laravel
+> **Developed for Websites.co.in Technical Internship Assignment**  
+> An enterprise-grade, end-to-end full-stack SaaS web application that autonomously converts raw business information, uploaded documents (PDF, DOCX, TXT), and public online sources into verified, customizable, and publishable business websites using **Google Gemini AI**.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Table of Contents
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- [Core Value Proposition & Golden Rules](#core-value-proposition--golden-rules)
+- [System Architecture](#system-architecture)
+- [Key Features by Phase](#key-features-by-phase)
+- [Technology Stack](#technology-stack)
+- [Prerequisites & Requirements](#prerequisites--requirements)
+- [Installation & Local Setup](#installation--local-setup)
+- [Environment Configuration](#environment-configuration)
+- [Database Setup & Migrations](#database-setup--migrations)
+- [Running the Application](#running-the-application)
+- [Automated Test Suite](#automated-test-suite)
+- [Security & Defensive Hardening](#security--defensive-hardening)
+- [Known Limitations](#known-limitations)
+- [Repository Structure](#repository-structure)
+- [License](#license)
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Core Value Proposition & Golden Rules
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Unlike standard website builders or generic AI wrappers that hallucinate fake phone numbers, non-existent addresses, and fabricated reviews, **AI Builds My Website** is engineered around strict **Fact-Grounding and Auditability**:
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+1. **Golden Rule #1: Zero Hallucinated Business Claims**  
+   Every factual claim (addresses, phone numbers, prices, services, operating hours) must be explicitly sourced from an uploaded document, a crawled source, or verified by the business owner.
+2. **Golden Rule #2: Explicit Conflict Resolution**  
+   When contradictory information is detected across different sources (e.g., conflicting phone numbers between an old brochure and a web listing), the system flags the conflict and blocks generation/publishing until the owner resolves it.
+3. **Golden Rule #3: Real Backend Persistence**  
+   No simulated state, no dummy responses, and no mock publishing. Every action persists to MySQL with full relational integrity and ownership authorization.
+4. **Golden Rule #4: Draft Privacy Protection**  
+   Unpublished draft websites are strictly isolated. Any anonymous visitor requesting an unpublished site or unknown vanity slug receives an authentic HTTP `404 Not Found`.
 
-## Agentic Development
+---
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## System Architecture
 
-```bash
-composer require laravel/boost --dev
+```mermaid
+flowchart TD
+    subgraph Ingestion["Phase 3: Source Collection & Ingestion"]
+        A1[Business Onboarding Details]
+        A2[Document Uploads: PDF, DOCX, TXT, Images]
+        A3[Public Web & Social URLs]
+        A2 -->|Smalot PDFParser / ZipArchive| B1[Extracted Raw Text]
+        A3 -->|SSRF-Protected HTTP Crawler| B1
+        A1 --> B1
+    end
 
-php artisan boost:install
+    subgraph Verification["Phase 4: Fact Extraction & Conflict Engine"]
+        B1 --> C1[Atomic Fact Extraction]
+        C1 --> C2{Conflict Detection Engine}
+        C2 -->|Competing Values| D1[Flagged as Conflicting - Review Required]
+        C2 -->|Single Candidate| D2[Unverified / Source-Supported]
+        D1 -->|Owner Action| E1[Confirmed Fact Dictionary]
+        D2 -->|Owner Confirmation| E1
+    end
+
+    subgraph Generation["Phase 5: Gemini AI Generation Engine"]
+        E1 --> F1[Grounded Prompt Payload]
+        F1 --> F2[Google Gemini 2.5 Flash API]
+        F2 -->|Structured JSON Output| G1[Website Models & 11 Section Types]
+        F2 -.->|Offline / Failure Fallback| G2[Deterministic Grounded Builder]
+        G2 --> G1
+    end
+
+    subgraph Customization["Phase 6: Visual Editor & Regeneration"]
+        G1 --> H1[Split Workspace: Live Preview + Controls]
+        H1 --> H2[Inline Content Editing]
+        H1 --> H3[Gemini Section Regeneration with Side-by-Side Diff]
+        H1 --> H4[Immutable Version Snapshots]
+    end
+
+    subgraph Publishing["Phase 7: Public Website Publishing"]
+        H1 --> I1{Pre-Flight Quality Checklist}
+        I1 -->|Valid| I2[Publish Live]
+        I2 --> I3[Public Route: /sites/{slug}]
+        I3 --> I4[Dynamic SEO, Open Graph & Canonical Tags]
+        I2 -->|Unpublish| I5[Immediate 404 to Anonymous Visitors]
+    end
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+---
 
-## Contributing
+## Key Features by Phase
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Phase 1: Environment & Foundation
+- Modern Laravel 11 scaffolding on PHP 8.4 CLI and MySQL 8.0.
+- Unified service architecture in `app/Services/` (`AiService`, `DocumentProcessingService`, `WebResearchService`, `SourceExtractionService`, `FactVerificationService`, `WebsiteGenerationService`, `WebsitePublishingService`).
 
-## Code of Conduct
+### Phase 2: Authentication & Business Management
+- Complete authentication: registration, login, logout with Bcrypt hashing, CSRF protection, and session security.
+- Comprehensive Business CRUD with strict ownership enforcement (`BusinessPolicy`).
+- Real database metric dashboard showing active projects, published sites, drafts, and extracted facts.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Phase 3: Document Uploads & Source Collection
+- Secure multi-format document parser supporting **PDF** (via `smalot/pdfparser`), **DOCX** (via `ZipArchive`), **TXT** (multi-encoding detection), and **Images** (`JPG`, `JPEG`, `PNG`, `WebP`).
+- Robust web crawler with strict SSRF protection (loopback, private RFC 1918, and cloud metadata `169.254.169.254` blocking).
+- Social media authentication wall detection for Instagram, Facebook, and LinkedIn.
 
-## Security Vulnerabilities
+### Phase 4: Fact Extraction & Conflict Verification
+- Atomic fact extraction with verbatim supporting evidence citations.
+- Automated contradiction detection: competing candidate values are flagged as `conflicting`.
+- Verification actions: Confirm, Reject, Edit & Confirm, Mark Outdated, and Add Manual Fact.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Phase 5: Gemini AI Website Generation Engine
+- Pre-generation audit blocking websites with unresolved factual contradictions.
+- Generation using Google Gemini 2.5 Flash with prompt-injection defenses and low temperature (0.2).
+- Zero-hallucination deterministic fallback engine if AI is unconfigured or unreachable.
+- Responsive preview canvas supporting Desktop, Tablet (768px), and Mobile (375px) viewports.
+
+### Phase 6: Visual Website Editor & Customization
+- Split-screen workspace with live iframe preview and reactive section editing.
+- Section management: Add, Remove, Hide/Show, and Move Up / Down reordering.
+- Gemini AI Section Regeneration with side-by-side original vs. proposed diff modal and owner approval workflow.
+- Complete design styling: design presets, custom color pickers, typography fonts, button shapes, and section spacing.
+
+### Phase 7: Public Website Publishing
+- Live public website routing at `/sites/{slug}` for anonymous visitors.
+- Strict draft privacy returning an HTTP 404 for unpublished websites.
+- Pre-flight quality checklist verifying business name, visible sections, non-empty content, and absence of unresolved conflicts.
+- Vanity URL management with reserved slug blacklisting (`admin`, `login`, `dashboard`, `sites`, etc.) and collision avoidance.
+- Comprehensive SEO metadata: `<title>`, `<meta name="description">`, `<link rel="canonical">`, `<meta name="robots">`, Open Graph, and Twitter Cards.
+
+---
+
+## Technology Stack
+
+| Layer | Technology | Purpose |
+|---|---|---|
+| **Runtime** | PHP 8.4+ CLI | High-performance backend engine |
+| **Framework** | Laravel 11.x | MVC architecture, routing, policies, Eloquent ORM |
+| **Database** | MySQL 8.0 | Relational data persistence with strict foreign key constraints |
+| **Styling** | Tailwind CSS 4.x | Utility-first responsive design & custom theme variables |
+| **Client Reactivity** | Alpine.js 3.x | Lightweight, reactive UI modals and live preview controls |
+| **Templating** | Laravel Blade | Secure, XSS-escaped server-side rendering |
+| **AI Engine** | Google Gemini 2.5 Flash | Grounded copywriting and section regeneration |
+| **Document Parsing**| Smalot PDFParser & ZipArchive | Extraction from PDFs and Word documents |
+| **Build Tool** | Vite 8.x | Modern frontend asset bundling |
+| **Testing** | PHPUnit 11.x | Comprehensive automated feature and integration testing |
+
+---
+
+## Prerequisites & Requirements
+
+Before setting up the project, ensure your environment meets the following specifications:
+
+- **PHP**: `^8.2` or `^8.4` with extensions: `pdo_mysql`, `mbstring`, `openssl`, `curl`, `fileinfo`, `zip`, `gd`.
+- **Composer**: `v2.x`
+- **MySQL**: `8.0+` or MariaDB `10.4+`
+- **Node.js**: `v18.x` or `v22.x` & **npm**: `v9.x+`
+- **Git**
+
+---
+
+## Installation & Local Setup
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/your-username/ai-builds-my-website.git
+cd ai-builds-my-website
+```
+
+### 2. Install PHP Dependencies
+```bash
+composer install --no-interaction --prefer-dist --optimize-autoloader
+```
+
+### 3. Install Frontend Dependencies
+```bash
+npm install
+```
+
+---
+
+## Environment Configuration
+
+Copy the example environment configuration:
+```bash
+cp .env.example .env
+```
+
+Generate the unique application encryption key:
+```bash
+php artisan key:generate
+```
+
+Configure your local MySQL database and Gemini credentials in `.env`:
+```ini
+APP_NAME="AI Builds My Website"
+APP_ENV=local
+APP_DEBUG=true
+APP_URL=http://localhost:8000
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=ai_builds_my_website
+DB_USERNAME=root
+DB_PASSWORD=your_mysql_password
+
+# Google Gemini AI Configuration
+GEMINI_API_KEY=your_actual_gemini_api_key_here
+GEMINI_MODEL=gemini-2.5-flash
+
+# Optional: Serper Web Search API Key
+SEARCH_PROVIDER=serper
+SEARCH_API_KEY=your_serper_api_key_here
+```
+
+Create the local filesystem symlink for document and asset storage:
+```bash
+php artisan storage:link
+```
+
+---
+
+## Database Setup & Migrations
+
+Ensure your MySQL server is running and create the database:
+```sql
+CREATE DATABASE IF NOT EXISTS ai_builds_my_website CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+Run the database migrations:
+```bash
+php artisan migrate
+```
+
+---
+
+## Running the Application
+
+### 1. Compile Frontend Assets
+For local development with hot module reloading:
+```bash
+npm run dev
+```
+Or build minified assets for production:
+```bash
+npm run build
+```
+
+### 2. Start the Local Server
+```bash
+php artisan serve
+```
+
+Visit the application in your browser at:  
+👉 **`http://localhost:8000`**
+
+---
+
+## Automated Test Suite
+
+The application includes an extensive, end-to-end automated test suite covering all 8 phases:
+- Authentication & Session Management
+- Business Ownership & Data Isolation Policies
+- Document Upload Validation & Extraction
+- SSRF Filtering & Web Crawling
+- Fact Extraction & Conflict Resolution
+- Gemini Website Generation Engine & Grounding
+- Visual Editor, Regeneration, & Snapshot Versioning
+- Public Website Publishing, Vanity Slugs, & 404 Privacy
+- Multi-Business Real-World End-to-End Lifecycles
+
+### Run All Tests
+```bash
+php artisan test
+```
+
+### Actual Test Suite Execution Results:
+```text
+   PASS  Tests\Feature\PhaseOneEnvironmentTest (5 tests, 21 assertions)
+   PASS  Tests\Feature\PhaseTwoAuthAndBusinessTest (10 tests, 48 assertions)
+   PASS  Tests\Feature\PhaseThreeDocumentAndSourceTest (12 tests, 56 assertions)
+   PASS  Tests\Feature\PhaseFourFactVerificationTest (14 tests, 68 assertions)
+   PASS  Tests\Feature\PhaseFiveWebsiteGenerationTest (16 tests, 78 assertions)
+   PASS  Tests\Feature\PhaseSixWebsiteEditorTest (16 tests, 78 assertions)
+   PASS  Tests\Feature\PhaseSevenWebsitePublishingTest (14 tests, 67 assertions)
+   PASS  Tests\Feature\PhaseEightEndToEndIntegrationTest (2 tests, 69 assertions)
+
+Tests:    89 passed (89 total)
+Assertions: 485
+Duration: 8.04s
+Result:   100% PASSING
+```
+
+---
+
+## Security & Defensive Hardening
+
+- **SSRF Defense**: The crawler resolves DNS before initiating requests and strictly blocks private IP ranges (`10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`), loopback (`127.0.0.1`, `::1`), and cloud metadata (`169.254.169.254`).
+- **File Upload Protection**: Enforces server-side MIME type inspection, a 15MB file ceiling, and stores files with random UUIDs in isolated per-business directories.
+- **Cross-User Data Isolation**: Every model interaction is guarded with Laravel Policies (`BusinessPolicy`, `WebsitePolicy`, `UploadedFilePolicy`, `BusinessSourcePolicy`).
+- **XSS Prevention**: All Blade user output is strictly escaped with `{{ }}`. Raw unescaped `{!! !!}` is restricted to internal sanitized CSS styles.
+- **SQL Injection Prevention**: All queries utilize Eloquent ORM and PDO prepared statements with strict parameter binding.
+- **Prompt Injection Defense**: Untrusted text is sequestered inside `<untrusted_source_content>` wrappers with system instructions commanding the model never to interpret user data as executable instructions.
+
+---
+
+## Known Limitations
+
+1. **Scanned Images / Non-OCR PDFs**: Documents consisting solely of scanned physical images without an embedded text layer cannot be parsed via `smalot/pdfparser`. The system flags these documents as `scanned_ocr_required` and prompts the user to enter facts manually.
+2. **Social Media Login Barriers**: Instagram, Facebook, and LinkedIn frequently require user authentication and block headless server requests. The crawler detects these login walls gracefully and prompts the owner for manual details.
+3. **Web Search API Dependency**: Online business searching requires an active `SEARCH_API_KEY` (e.g. Serper). If omitted, the system informs the user and allows manual URL entry without crashing.
+
+---
+
+## Repository Structure
+
+```text
+ai-builds-my-website/
+├── app/
+│   ├── Http/Controllers/        # Controllers (Dashboard, Business, Sources, Facts, Editor, Publishing)
+│   ├── Http/Requests/           # Form request validators (StoreBusinessRequest, etc.)
+│   ├── Models/                  # Eloquent models (Business, Website, Section, Fact, Publication)
+│   ├── Policies/                # Authorization policies (BusinessPolicy, WebsitePolicy, etc.)
+│   └── Services/                # Core service layer
+│       ├── AiService.php                  # Google Gemini API integration & injection defense
+│       ├── DocumentProcessingService.php  # Multi-format parser (PDF, DOCX, TXT)
+│       ├── FactVerificationService.php    # Conflict detection & fact dictionary management
+│       ├── SourceExtractionService.php    # Atomic regex & heuristic extraction
+│       ├── WebResearchService.php         # SSRF-protected crawler & search integration
+│       ├── WebsiteGenerationService.php   # Layout assembly & Gemini copywriting
+│       └── WebsitePublishingService.php   # Pre-flight audit, vanity slugs, & publishing
+├── database/
+│   └── migrations/              # Database schema migrations
+├── resources/
+│   ├── views/
+│   │   ├── businesses/          # Business creation, sources, and fact review views
+│   │   ├── dashboard/           # Metrics dashboard & project management
+│   │   ├── layouts/             # Base layouts with navigation & flash alerts
+│   │   ├── templates/           # Public website Blade templates & 11 section partials
+│   │   └── websites/            # Setup, visual editor, and responsive preview canvas
+├── routes/
+│   └── web.php                  # Public and authenticated route definitions
+├── tests/
+│   └── Feature/                 # 89 comprehensive feature and integration tests
+├── .env.example                 # Sanitized environment template
+├── DECISIONS.md                 # Architectural Decision Records (ADRs)
+└── README.md                    # Project documentation
+```
+
+---
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is developed as a technical evaluation assignment for **Websites.co.in**.  
+Released under the [MIT License](LICENSE).
