@@ -36,6 +36,14 @@
                 </div>
 
                 <div class="mt-4 sm:mt-0 flex items-center gap-2.5">
+                    <a href="{{ route('businesses.sources.index', $business) }}"
+                        class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-blue-600 text-white hover:bg-blue-700 shadow-xs transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                        </svg>
+                        <span>Manage Documents & Sources</span>
+                    </a>
+
                     <a href="{{ route('businesses.edit', $business) }}"
                         class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 shadow-2xs transition-colors">
                         <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -172,15 +180,19 @@
                         </div>
 
                         <!-- Step 2: Documents & Sources (Phase 3) -->
-                        <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50 flex items-start gap-3">
-                            <div class="w-6 h-6 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">
+                        <a href="{{ route('businesses.sources.index', $business) }}"
+                            class="p-3.5 rounded-xl border border-blue-200 bg-blue-50/50 hover:bg-blue-50 hover:border-blue-300 transition-all flex items-start gap-3 block group">
+                            <div class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">
                                 2
                             </div>
                             <div>
-                                <div class="text-xs font-bold text-slate-800">Step 2: Upload Documents & Sources</div>
-                                <div class="text-[11px] text-slate-500 mt-0.5">Upload PDFs, menus, brochures, and web links (Phase 3).</div>
+                                <div class="text-xs font-bold text-blue-900 group-hover:underline flex items-center gap-1.5">
+                                    <span>Step 2: Upload Documents & Sources</span>
+                                    <span>→</span>
+                                </div>
+                                <div class="text-[11px] text-blue-700 mt-0.5">Upload PDFs, menus, brochures, and web links (Active).</div>
                             </div>
-                        </div>
+                        </a>
 
                         <!-- Step 3: Fact Verification (Phase 4) -->
                         <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50 flex items-start gap-3">

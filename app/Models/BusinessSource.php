@@ -16,12 +16,14 @@ class BusinessSource extends Model
         'url',
         'title',
         'raw_content',
+        'metadata',
         'status',
         'error_message',
         'crawled_at',
     ];
 
     protected $casts = [
+        'metadata' => 'array',
         'crawled_at' => 'datetime',
     ];
 

@@ -12,40 +12,27 @@ class SourceExtractionService
 {
     public function __construct(
         protected AiService $aiService,
-        protected PdfProcessingService $pdfService,
+        protected DocumentProcessingService $documentService,
         protected WebResearchService $webService
     ) {}
 
     /**
-     * Process an uploaded file and extract structured business facts.
+     * Process an uploaded file (PDF, DOCX, TXT, Image) and extract structured business facts.
      */
     public function processFile(UploadedFile $file): array
     {
         $file->update(['processing_status' => 'processing']);
 
-        if (strtolower($file->file_type) === 'pdf') {
-            $pdfResult = $this->pdfService->extractText($file->file_path);
+        $result = $this->documentService->process($file);
 
-            if (!$pdfResult['success'] && $pdfResult['status'] === 'failed') {
-                $file->update([
-                    'processing_status' => 'failed',
-                    'error_message' => $pdfResult['error'],
-                ]);
-                return $pdfResult;
-            }
+        if (!$result['success'] && $result['status'] === 'failed') {
+            return $result;
+        }
 
-            $extractedText = $pdfResult['text'] ?? '';
-            $file->update([
-                'extracted_text' => $extractedText,
-                'processing_status' => $pdfResult['status'],
-                'error_message' => $pdfResult['error'],
-            ]);
+        $extractedText = $result['text'] ?? '';
 
-            if (empty($extractedText) || $pdfResult['is_scanned']) {
-                return $pdfResult;
-            }
-
-            // Extract facts from text
+        // If selectable text is present and document is not a scanned image requiring OCR
+        if (!empty($extractedText) && ($result['status'] ?? '') === 'completed' && !in_array(strtolower($file->file_type), ['jpg', 'jpeg', 'png', 'webp', 'image'])) {
             $this->extractAndStoreFacts(
                 business: $file->business,
                 text: $extractedText,
@@ -53,25 +40,13 @@ class SourceExtractionService
                 sourceId: $file->id,
                 sourceUrl: $file->original_name
             );
-
-            return [
-                'success' => true,
-                'status' => $pdfResult['status'],
-                'page_count' => $pdfResult['page_count'],
-                'message' => 'File processed and facts extracted successfully.',
-            ];
         }
-
-        // Image files
-        $file->update([
-            'processing_status' => 'completed',
-            'extracted_text' => 'Image file uploaded. Visual asset stored for website gallery and hero imagery.',
-        ]);
 
         return [
             'success' => true,
-            'status' => 'completed',
-            'message' => 'Image stored successfully.',
+            'status' => $result['status'],
+            'message' => $result['error'] ?? 'File processed successfully.',
+            'metadata' => $result['metadata'] ?? [],
         ];
     }
 
@@ -85,12 +60,16 @@ class SourceExtractionService
             return ['success' => false, 'error' => 'No URL provided.'];
         }
 
+        $source->update(['status' => 'pending']);
+
         $crawlResult = $this->webService->crawlUrl($source->url);
 
         if (!$crawlResult['success']) {
             $source->update([
+                'title' => $crawlResult['title'] ?? null,
                 'status' => $crawlResult['status'],
                 'error_message' => $crawlResult['error'],
+                'metadata' => $crawlResult['metadata'] ?? null,
             ]);
             return $crawlResult;
         }
@@ -101,6 +80,7 @@ class SourceExtractionService
             'status' => 'crawled',
             'crawled_at' => now(),
             'error_message' => null,
+            'metadata' => $crawlResult['metadata'] ?? null,
         ]);
 
         $this->extractAndStoreFacts(

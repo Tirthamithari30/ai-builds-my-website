@@ -19,8 +19,14 @@ class UploadedFile extends Model
         'mime_type',
         'file_size',
         'extracted_text',
+        'metadata',
         'processing_status',
         'error_message',
+    ];
+
+    protected $casts = [
+        'metadata' => 'array',
+        'file_size' => 'integer',
     ];
 
     public function business(): BelongsTo
