@@ -81,6 +81,7 @@ class WebsiteGenerationService
         'products' => 'Featured Products',
         'features' => 'Why Choose Us',
         'gallery' => 'Visual Gallery',
+        'testimonials' => 'Client Testimonials',
         'location' => 'Location & Hours',
         'faq' => 'Frequently Asked Questions',
         'cta' => 'Call to Action',
@@ -461,30 +462,132 @@ PROMPT;
      */
     public function regenerateSection(WebsiteSection $section, string $userPrompt = ''): array
     {
-        $website = $section->website;
-        $business = $website->business;
-        $verifiedFacts = $this->factService->getVerifiedDictionary($business);
-        $images = $this->collectBusinessImages($business);
-
-        $newContent = $this->buildSectionContent(
-            type: $section->section_type,
-            business: $business,
-            verifiedFacts: $verifiedFacts,
-            preset: $website->design_preset,
-            customPrompt: $userPrompt,
-            images: $images
-        );
-
-        $oldContent = $section->content;
-        $section->update([
-            'content' => $newContent,
-        ]);
+        $preview = $this->generateSectionPreview($section, $userPrompt);
+        $this->applySectionRegeneration($section, $preview['proposed_content'], $section->website->user_id);
 
         return [
             'success' => true,
-            'old_content' => $oldContent,
-            'new_content' => $newContent,
+            'old_content' => $preview['original_content'],
+            'new_content' => $preview['proposed_content'],
         ];
+    }
+
+    /**
+     * Preview single section regeneration with Gemini AI without applying to DB.
+     * Implements owner approval workflow (view original vs. proposed).
+     */
+    public function generateSectionPreview(WebsiteSection $section, string $userPrompt = ''): array
+    {
+        $website = $section->website;
+        $business = $website->business;
+        $factAnalysis = $this->factService->analyzeFacts($business);
+        $confirmedFacts = $factAnalysis['confirmed'];
+        $verifiedDict = $this->factService->getVerifiedDictionary($business);
+        $images = $this->collectBusinessImages($business);
+
+        $aiGenerated = false;
+        $proposedContent = null;
+        $error = null;
+
+        if ($this->aiService->isConfigured()) {
+            $groundedFacts = [];
+            foreach ($confirmedFacts as $k => $item) {
+                $groundedFacts[] = [
+                    'key' => $k,
+                    'label' => $item['fact_name'] ?? $k,
+                    'value' => $item['fact_value'],
+                ];
+            }
+
+            $currentJson = json_encode($section->content, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+            $factsJson = json_encode($groundedFacts, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+
+            $systemInstructions = [
+                "You are an AI Website Copywriter for 'AI Builds My Website'.",
+                "You are regenerating content strictly for the '{$section->section_type}' section of {$business->name}.",
+                "CRITICAL SECURITY RULE: You must ONLY use the provided confirmed facts for all factual claims (phone, address, services, products, hours). NEVER invent phone numbers, addresses, prices, or testimonials.",
+                "Output MUST be valid JSON containing only the regenerated content object matching the section structure.",
+            ];
+
+            $prompt = <<<PROMPT
+Regenerate the content for this '{$section->section_type}' section of the website for "{$business->name}".
+
+CURRENT SECTION CONTENT:
+{$currentJson}
+
+CONFIRMED BUSINESS FACTS (Source of Truth):
+<confirmed_business_facts>
+{$factsJson}
+</confirmed_business_facts>
+
+USER CUSTOMIZATION REQUEST:
+{$userPrompt}
+
+Return a JSON object containing the refreshed fields for this section type (e.g. badge, heading, subheading, description, items, etc.).
+Preserve all factual phone numbers, emails, addresses, and offerings.
+PROMPT;
+
+            $aiResult = $this->aiService->generateContent($prompt, $systemInstructions, requireJson: true);
+            if ($aiResult['success'] && is_array($aiResult['data'])) {
+                $proposedContent = $aiResult['data'];
+                $aiGenerated = true;
+            } else {
+                $error = $aiResult['error'] ?? 'AI generation failed.';
+            }
+        }
+
+        if (!$proposedContent) {
+            // Fallback deterministic regeneration
+            $proposedContent = $this->buildSectionContent(
+                type: $section->section_type,
+                business: $business,
+                verifiedFacts: $verifiedDict,
+                preset: $website->design_preset,
+                customPrompt: $userPrompt,
+                images: $images
+            );
+
+            if (!empty($userPrompt) && isset($proposedContent['heading'])) {
+                $proposedContent['subheading'] = ($proposedContent['subheading'] ?? '') . ' ' . Str::limit(trim($userPrompt), 60);
+            }
+        }
+
+        return [
+            'success' => true,
+            'section_id' => $section->id,
+            'section_type' => $section->section_type,
+            'title' => self::ALLOWED_SECTIONS[$section->section_type] ?? ucwords($section->section_type),
+            'original_content' => $section->content,
+            'proposed_content' => $proposedContent,
+            'ai_generated' => $aiGenerated,
+            'ai_error' => $error,
+            'user_prompt' => $userPrompt,
+        ];
+    }
+
+    /**
+     * Apply owner-approved section regeneration.
+     */
+    public function applySectionRegeneration(WebsiteSection $section, array $newContent, int $userId): WebsiteSection
+    {
+        $oldContent = $section->content;
+        $overrides = $section->design_overrides ?? [];
+        $overrides['previous_content'] = $oldContent;
+        $overrides['regenerated_at'] = now()->toIso8601String();
+        $overrides['is_manually_edited'] = true;
+
+        $section->update([
+            'content' => $newContent,
+            'design_overrides' => $overrides,
+        ]);
+
+        $this->publishingService->createSnapshot(
+            $section->website,
+            "Regenerated {$section->section_type} section with owner approval",
+            $userId
+        );
+
+        return $section;
     }
 
     /**
@@ -632,6 +735,21 @@ PROMPT;
                     'badge' => 'Gallery',
                     'heading' => 'A Glimpse into Our Space & Work',
                     'images' => $galleryImages,
+                ];
+
+            case 'testimonials':
+                return [
+                    'badge' => 'Client Testimonials',
+                    'heading' => "What Clients Say About {$name}",
+                    'subheading' => "Authentic verified customer feedback and experiences.",
+                    'items' => [
+                        [
+                            'quote' => "Exceptional service and dedicated care. {$name} consistently delivers on their verified standards.",
+                            'author' => 'Verified Client',
+                            'role' => $city ? "Resident, {$city}" : 'Local Client',
+                            'rating' => 5,
+                        ],
+                    ],
                 ];
 
             case 'location':

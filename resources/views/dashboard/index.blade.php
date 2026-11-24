@@ -217,6 +217,10 @@
                                         <!-- Actions -->
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-xs font-medium space-x-2">
                                             @if ($site)
+                                                <a href="{{ route('websites.edit', $site) }}"
+                                                    class="inline-flex items-center px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-700 hover:bg-indigo-100 transition-colors font-semibold">
+                                                    Editor
+                                                </a>
                                                 <a href="{{ route('websites.preview', $site) }}"
                                                     class="inline-flex items-center px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100 transition-colors font-semibold">
                                                     Preview

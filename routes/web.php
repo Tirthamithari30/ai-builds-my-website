@@ -7,6 +7,7 @@ use App\Http\Controllers\BusinessSourceController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FactVerificationController;
 use App\Http\Controllers\UploadedFileController;
+use App\Http\Controllers\WebsiteEditorController;
 use App\Http\Controllers\WebsiteGenerationController;
 use Illuminate\Support\Facades\Route;
 
@@ -62,4 +63,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/websites/{website}/preview-frame', [WebsiteGenerationController::class, 'previewFrame'])->name('websites.preview.frame');
     Route::get('/websites/{website}/versions', [WebsiteGenerationController::class, 'versions'])->name('websites.versions');
     Route::post('/websites/{website}/versions/{version}/restore', [WebsiteGenerationController::class, 'restoreVersion'])->name('websites.versions.restore');
+
+    // Visual Website Editor (Phase 6)
+    Route::get('/websites/{website}/edit', [WebsiteEditorController::class, 'edit'])->name('websites.edit');
+    Route::post('/websites/{website}/sections', [WebsiteEditorController::class, 'addSection'])->name('websites.sections.add');
+    Route::put('/sections/{section}', [WebsiteEditorController::class, 'updateSection'])->name('sections.update');
+    Route::delete('/sections/{section}', [WebsiteEditorController::class, 'deleteSection'])->name('sections.delete');
+    Route::post('/sections/{section}/toggle-visibility', [WebsiteEditorController::class, 'toggleVisibility'])->name('sections.toggle-visibility');
+    Route::post('/websites/{website}/sections/reorder', [WebsiteEditorController::class, 'reorderSections'])->name('websites.sections.reorder');
+    Route::post('/sections/{section}/regenerate-preview', [WebsiteEditorController::class, 'regenerateSectionPreview'])->name('sections.regenerate-preview');
+    Route::post('/sections/{section}/apply-regeneration', [WebsiteEditorController::class, 'applySectionRegeneration'])->name('sections.apply-regeneration');
+    Route::put('/websites/{website}/design', [WebsiteEditorController::class, 'updateDesign'])->name('websites.design.update');
+    Route::post('/websites/{website}/save-all', [WebsiteEditorController::class, 'saveAll'])->name('websites.save-all');
 });
