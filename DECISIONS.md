@@ -160,7 +160,18 @@ Structure the application for deterministic production deployment with config ca
 
 ---
 
-## 12. Summary
+## 12. Documentation Architecture & Schema Specifications (Phase 12)
+
+### Decision:
+Maintain a modular documentation ecosystem decoupling high-level project narrative (`README.md`) from specialized technical references (`DATABASE.md`, `API.md`, `DEPLOYMENT.md`, `DECISIONS.md`, and `DEMO_SCRIPT.md`).
+
+### Rationale:
+1. **Separation of Concerns for Technical Reviewers**: Evaluators and hiring teams can inspect architecture and problem context in `README.md` while deep-diving into granular database schemas in `DATABASE.md` or endpoint payloads in `API.md` without wading through a single unmanageable monolithic file.
+2. **Defensive Credential Hygiene**: All documentation and environment templates (`.env.example`, `.env.production.example`) use explicitly sanitized placeholder values, tested by automated assertions to guarantee no real credentials ever leak to version control.
+
+---
+
+## 13. Summary
 
 Every architectural decision in **AI Builds My Website** was guided by two overarching criteria:
 1. **Authenticity & Integrity**: The system must never hallucinate, invent claims, or publish unverified contradictions.

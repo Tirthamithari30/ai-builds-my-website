@@ -20,8 +20,11 @@ The application autonomously transforms raw business details, uploaded documents
 - **GitHub Repository:** [Insert your GitHub Repository URL here, e.g. https://github.com/your-username/ai-builds-my-website]
 - **5-Minute Video Demonstration:** [Insert your Loom / YouTube / Drive Video Link here]
 - **Key Documentation in Repository:**
-  - `README.md` — Complete architecture overview, prerequisites, installation guide, and security hardening details.
-  - `DECISIONS.md` — Detailed Architectural Decision Records (ADRs) explaining the technical rationale for Laravel, MySQL, Blade, SSRF filtering, and immutable snapshot versioning.
+  - `README.md` — Complete architecture overview, problem statement, objectives, configuration guide, and security hardening details.
+  - `DATABASE.md` — Detailed MySQL 8.0 schema reference with ER diagrams, column data types, foreign keys, and indexes.
+  - `API.md` — Complete HTTP route specification covering all 54 endpoints, parameters, and responses.
+  - `DEPLOYMENT.md` — Production operations manual with Nginx setup, Certbot SSL, automated backup/restore scripts, and zero-downtime updates.
+  - `DECISIONS.md` — Detailed Architectural Decision Records (ADRs) explaining technical rationale for framework, database, AI boundaries, and security policies.
   - `DEMO_SCRIPT.md` — The exact 5-minute timed script demonstrating two real businesses (*Patil Traditional Spices & Foods* and *Dr. Kulkarni Ayurvedic Wellness Clinic*).
 
 ---
@@ -48,7 +51,7 @@ The application autonomously transforms raw business details, uploaded documents
 6. **Defensive Security & 100% Automated Test Coverage:**
    - Multi-layer security: authentication rate limiting (5 attempts/min), CSS injection sanitization, IDOR prevention across all models, and 100% parameterized queries.
    - Production readiness: automated daily MySQL backup script (`scripts/backup-db.sh`), disaster recovery script (`scripts/restore-db.sh`), zero-downtime deployment script (`scripts/deploy.sh`), and comprehensive deployment documentation (`DEPLOYMENT.md`).
-   - **124 automated tests** with **679 assertions**, all passing (100% green).
+   - **129 automated tests** with **741 assertions**, all passing (100% green).
 
 ---
 
