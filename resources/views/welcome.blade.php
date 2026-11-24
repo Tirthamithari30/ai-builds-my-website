@@ -19,7 +19,7 @@
     </div>
 
     <!-- Main Navigation -->
-    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200/80 shadow-xs">
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200/80 shadow-xs" x-data="{ mobileNavOpen: false }">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-white shadow-sm font-bold text-lg tracking-tight">
@@ -31,9 +31,10 @@
                 </div>
             </div>
 
-            <div class="flex items-center gap-4">
-                <a href="#architecture" class="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors hidden sm:inline-block">Architecture</a>
-                <a href="#services" class="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors hidden sm:inline-block">Services</a>
+            <!-- Desktop Links -->
+            <div class="hidden sm:flex items-center gap-4">
+                <a href="#architecture" class="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors">Architecture</a>
+                <a href="#services" class="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors">Services</a>
                 @auth
                     <a href="{{ route('dashboard') }}" class="inline-flex items-center px-4 py-2 rounded-xl text-xs font-semibold bg-blue-600 text-white hover:bg-blue-700 shadow-xs transition-colors">
                         Go to Dashboard
@@ -44,6 +45,57 @@
                     </a>
                     <a href="{{ route('register') }}" class="inline-flex items-center px-4 py-2 rounded-xl text-xs font-semibold bg-blue-600 text-white hover:bg-blue-700 shadow-xs transition-colors">
                         Get Started
+                    </a>
+                @endauth
+            </div>
+
+            <!-- Mobile Hamburger Toggle -->
+            <div class="sm:hidden flex items-center">
+                <button type="button"
+                        @click="mobileNavOpen = !mobileNavOpen"
+                        class="p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors focus:outline-hidden"
+                        aria-label="Toggle mobile menu"
+                        data-testid="welcome-mobile-toggle">
+                    <svg x-show="!mobileNavOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                    <svg x-show="mobileNavOpen" class="w-6 h-6 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: none;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div x-show="mobileNavOpen"
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 -translate-y-2"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100 translate-y-0"
+             x-transition:leave-end="opacity-0 -translate-y-2"
+             class="sm:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-5 space-y-3 shadow-lg"
+             id="welcome-mobile-drawer"
+             style="display: none;">
+            <nav class="space-y-1">
+                <a href="#architecture" @click="mobileNavOpen = false" class="block px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">
+                    Architecture
+                </a>
+                <a href="#services" @click="mobileNavOpen = false" class="block px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">
+                    Services
+                </a>
+            </nav>
+            <div class="pt-2 border-t border-slate-100 flex flex-col gap-2">
+                @auth
+                    <a href="{{ route('dashboard') }}" class="w-full text-center py-2.5 px-4 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-xs">
+                        Go to Dashboard
+                    </a>
+                @else
+                    <a href="{{ route('login') }}" class="w-full text-center py-2 px-4 rounded-xl text-xs font-semibold border border-slate-300 text-slate-700 hover:bg-slate-50">
+                        Sign In
+                    </a>
+                    <a href="{{ route('register') }}" class="w-full text-center py-2.5 px-4 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-xs">
+                        Get Started Free
                     </a>
                 @endauth
             </div>

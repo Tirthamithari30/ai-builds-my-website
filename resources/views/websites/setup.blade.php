@@ -4,12 +4,40 @@
              selectedPreset: 'modern_minimal',
              primaryColor: '#2563eb',
              secondaryColor: '#0f172a',
+             generating: false,
              updatePreset(preset, primary, secondary) {
                  this.selectedPreset = preset;
                  this.primaryColor = primary;
                  this.secondaryColor = secondary;
              }
          }">
+
+        <!-- Generation Loading Overlay -->
+        <div x-show="generating"
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             class="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4"
+             style="display: none;"
+             data-testid="generating-overlay">
+            <div class="bg-white rounded-3xl p-8 max-w-md w-full text-center shadow-2xl border border-slate-100">
+                <div class="relative w-20 h-20 mx-auto mb-6">
+                    <div class="absolute inset-0 rounded-full border-4 border-blue-100 animate-pulse"></div>
+                    <div class="w-20 h-20 rounded-full border-4 border-blue-600 border-t-transparent animate-spin"></div>
+                    <div class="absolute inset-0 flex items-center justify-center font-extrabold text-blue-600 text-base">
+                        AI
+                    </div>
+                </div>
+                <h3 class="text-xl font-extrabold text-slate-900 tracking-tight">Generating Your Website</h3>
+                <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+                    Gemini AI is analyzing verified business facts, structuring responsive sections, and applying your selected theme. This typically takes 5–15 seconds.
+                </p>
+                <div class="mt-6 flex items-center justify-center gap-2 text-[11px] font-semibold text-blue-700 bg-blue-50 py-2.5 px-4 rounded-xl border border-blue-100">
+                    <span class="w-2 h-2 rounded-full bg-blue-600 animate-ping"></span>
+                    <span>Zero Invention Engine • Grounded Truth Guaranteed</span>
+                </div>
+            </div>
+        </div>
 
         <!-- Breadcrumbs -->
         <nav class="flex items-center text-xs font-medium text-slate-500 mb-3">
@@ -215,7 +243,7 @@
         </div>
 
         <!-- 3. WEBSITE GENERATION OPTIONS FORM -->
-        <form method="POST" action="{{ route('businesses.website.generate', $business) }}" class="mt-8 space-y-8">
+        <form method="POST" action="{{ route('businesses.website.generate', $business) }}" class="mt-8 space-y-8" @submit="generating = true">
             @csrf
 
             <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 sm:p-8 space-y-8">
@@ -368,12 +396,17 @@
                     @endif
 
                     <button type="submit"
-                            {{ $hasConflicts ? 'disabled' : '' }}
-                            class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-white shadow-xs transition-all {{ $hasConflicts ? 'bg-slate-300 cursor-not-allowed opacity-60' : 'bg-blue-600 hover:bg-blue-700 shadow-blue-500/25' }}">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            :disabled="generating || {{ $hasConflicts ? 'true' : 'false' }}"
+                            class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-white shadow-xs transition-all {{ $hasConflicts ? 'bg-slate-300 cursor-not-allowed opacity-60' : 'bg-blue-600 hover:bg-blue-700 shadow-blue-500/25' }}"
+                            data-testid="generate-website-submit-btn">
+                        <svg x-show="!generating" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                         </svg>
-                        <span>Generate Website with Gemini AI</span>
+                        <svg x-show="generating" class="w-4 h-4 animate-spin text-white" fill="none" viewBox="0 0 24 24" style="display: none;">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                        </svg>
+                        <span x-text="generating ? 'Generating Website...' : 'Generate Website with Gemini AI'">Generate Website with Gemini AI</span>
                     </button>
                 </div>
             </div>

@@ -398,10 +398,11 @@ php artisan test
    PASS  Tests\Feature\PhaseElevenProductionConfigurationTest (9 tests, 56 assertions)
    PASS  Tests\Feature\PhaseTwelveDocumentationTest (5 tests, 62 assertions)
    PASS  Tests\Feature\PhaseThirteenWebsiteRunnableAndVisibleTest (9 tests, 48 assertions)
+   PASS  Tests\Feature\PhaseFourteenUiUxImprovementTest (8 tests, 45 assertions)
 
-Tests:    138 passed (138 total)
-Assertions: 789
-Duration: ~11.5s
+Tests:    146 passed (146 total)
+Assertions: 834
+Duration: ~14.8s
 Result:   100% PASSING
 ```
 

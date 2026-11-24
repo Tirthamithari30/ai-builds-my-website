@@ -23,37 +23,45 @@
 
         <!-- Real Database Metrics Grid -->
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
-            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs hover:border-blue-300 hover:shadow-sm transition-all group">
                 <div class="flex items-center justify-between text-slate-500 text-xs font-semibold uppercase tracking-wider">
                     <span>Saved Projects</span>
-                    <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                    <div class="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                    </div>
                 </div>
                 <div class="mt-3 text-3xl font-extrabold text-slate-900">{{ $stats['total_businesses'] }}</div>
                 <div class="mt-1 text-xs text-slate-500">Total active business profiles</div>
             </div>
 
-            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs hover:border-emerald-300 hover:shadow-sm transition-all group">
                 <div class="flex items-center justify-between text-slate-500 text-xs font-semibold uppercase tracking-wider">
                     <span>Published Websites</span>
-                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                    <div class="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    </div>
                 </div>
                 <div class="mt-3 text-3xl font-extrabold text-slate-900">{{ $stats['published_websites'] }}</div>
                 <div class="mt-1 text-xs text-slate-500">Live at unique public URLs</div>
             </div>
 
-            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs hover:border-amber-300 hover:shadow-sm transition-all group">
                 <div class="flex items-center justify-between text-slate-500 text-xs font-semibold uppercase tracking-wider">
                     <span>Draft Websites</span>
-                    <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                    <div class="w-7 h-7 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                    </div>
                 </div>
                 <div class="mt-3 text-3xl font-extrabold text-slate-900">{{ $stats['draft_websites'] }}</div>
                 <div class="mt-1 text-xs text-slate-500">Private work in progress</div>
             </div>
 
-            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs hover:border-indigo-300 hover:shadow-sm transition-all group">
                 <div class="flex items-center justify-between text-slate-500 text-xs font-semibold uppercase tracking-wider">
                     <span>Extracted Facts</span>
-                    <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+                    <div class="w-7 h-7 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    </div>
                 </div>
                 <div class="mt-3 text-3xl font-extrabold text-slate-900">{{ $stats['total_facts'] }}</div>
                 <div class="mt-1 text-xs text-slate-500">From uploaded docs & sources</div>

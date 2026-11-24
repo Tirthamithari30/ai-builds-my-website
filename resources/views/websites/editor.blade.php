@@ -118,9 +118,14 @@
                     <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">
                         Editor v{{ $website->current_version }}
                     </span>
-                    <span class="hidden sm:inline-flex items-center gap-1.5 text-[11px] text-emerald-400 font-semibold bg-emerald-950/60 px-2 py-0.5 rounded-full border border-emerald-900">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                        <span x-text="saveStatus">All changes saved</span>
+                    <span class="hidden sm:inline-flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1 rounded-full border transition-colors"
+                          :class="saving ? 'bg-amber-950/60 text-amber-300 border-amber-800' : 'bg-emerald-950/60 text-emerald-400 border-emerald-900'">
+                        <svg x-show="saving" class="w-3 h-3 animate-spin text-amber-400" fill="none" viewBox="0 0 24 24" style="display: none;">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                        </svg>
+                        <span x-show="!saving" class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span x-text="saving ? 'Saving changes...' : saveStatus">All changes saved</span>
                     </span>
                 </div>
             </div>
