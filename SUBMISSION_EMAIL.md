@@ -51,7 +51,8 @@ The application autonomously transforms raw business details, uploaded documents
 6. **Defensive Security & 100% Automated Test Coverage:**
    - Multi-layer security: authentication rate limiting (5 attempts/min), CSS injection sanitization, IDOR prevention across all models, and 100% parameterized queries.
    - Production readiness: automated daily MySQL backup script (`scripts/backup-db.sh`), disaster recovery script (`scripts/restore-db.sh`), zero-downtime deployment script (`scripts/deploy.sh`), and comprehensive deployment documentation (`DEPLOYMENT.md`).
-   - **129 automated tests** with **741 assertions**, all passing (100% green).
+   - Live accessibility verified: all 7 core pages (Landing, Login, Register, Dashboard, Setup, Preview, and Public Site) load cleanly over HTTP with zero errors.
+   - **138 automated tests** with **789 assertions**, all passing (100% green).
 
 ---
 

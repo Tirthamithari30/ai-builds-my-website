@@ -232,13 +232,14 @@ Stores candidate facts parsed from sources, documents, or initial onboarding for
 The **Verified Fact Dictionary** representing the single source of truth for website generation.
 - `id`: BIGINT UNSIGNED AUTO_INCREMENT, Primary Key
 - `business_id`: BIGINT UNSIGNED, Foreign Key -> `businesses(id)` ON DELETE CASCADE
-- `fact_category`: VARCHAR(50), NOT NULL
 - `fact_key`: VARCHAR(100), NOT NULL
-- `confirmed_value`: LONGTEXT, NOT NULL
-- `confirmation_type`: VARCHAR(50), NOT NULL (`direct_confirm`, `edit_confirm`, `conflict_resolution`, `manual_entry`)
-- `confirmed_at`: TIMESTAMP, DEFAULT CURRENT_TIMESTAMP
+- `confirmed_value`: TEXT, NOT NULL
+- `resolution_type`: VARCHAR(50), DEFAULT 'accepted' (`accepted`, `custom_edited`, `rejected`, `conflict_resolved`)
+- `conflict_candidates`: JSON, NULLABLE
+- `confirmed_by`: BIGINT UNSIGNED, Foreign Key -> `users(id)` ON DELETE CASCADE
+- `confirmed_at`: TIMESTAMP, NOT NULL
 - `created_at`, `updated_at`: TIMESTAMP
-- **Unique Constraint:** `business_id` + `fact_category` + `fact_key`
+- **Indexes:** `business_id` + `fact_key`
 
 ---
 
@@ -292,11 +293,11 @@ Immutable historical snapshots preserving full website configuration on each sav
 Publication ledger maintaining audit records and state for every public deployment.
 - `id`: BIGINT UNSIGNED AUTO_INCREMENT, Primary Key
 - `website_id`: BIGINT UNSIGNED, Foreign Key -> `websites(id)` ON DELETE CASCADE
-- `published_slug`: VARCHAR(255), NOT NULL
-- `public_url`: VARCHAR(2048), NOT NULL
-- `version_number`: INT, NOT NULL
-- `snapshot_content`: JSON, NOT NULL
+- `version_id`: BIGINT UNSIGNED, NULLABLE, Foreign Key -> `website_versions(id)` ON DELETE SET NULL
+- `published_url`: VARCHAR(2048), NOT NULL
+- `published_by`: BIGINT UNSIGNED, Foreign Key -> `users(id)` ON DELETE CASCADE
+- `is_active`: BOOLEAN, DEFAULT TRUE
 - `published_at`: TIMESTAMP, NOT NULL
 - `unpublished_at`: TIMESTAMP, NULLABLE
 - `created_at`, `updated_at`: TIMESTAMP
-- **Indexes:** `website_id`, `published_slug`
+- **Indexes:** `website_id` + `is_active`

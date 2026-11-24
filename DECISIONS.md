@@ -171,7 +171,18 @@ Maintain a modular documentation ecosystem decoupling high-level project narrati
 
 ---
 
-## 13. Summary
+## 13. Live Server Readiness & Full Page Visibility (Phase 13)
+
+### Decision:
+Validate and assert the accessibility of all 7 critical user-facing application pages both programmatically and via real HTTP server port binding (`artisan serve`), confirming zero blank screens, missing assets, or routing defects.
+
+### Rationale:
+1. **End-to-End Page Accessibility**: Automated tests verify HTTP 200 responses, asset link integrity (`manifest.json`), and content completeness across the landing page (`/`), registration (`/register`), login (`/login`), user dashboard (`/dashboard`), website generation setup (`/businesses/{id}/website/setup`), responsive preview canvas (`/websites/{id}/preview`), business management (`/businesses/{id}`), and live public websites (`/sites/{slug}`).
+2. **Real Server Probe Verification**: Direct HTTP probes against a live background PHP server process confirm real-world TCP port binding, complete HTML payload delivery (21.5 KB homepage), and successful Vite CSS/JS bundle resolution.
+
+---
+
+## 14. Summary
 
 Every architectural decision in **AI Builds My Website** was guided by two overarching criteria:
 1. **Authenticity & Integrity**: The system must never hallucinate, invent claims, or publish unverified contradictions.
