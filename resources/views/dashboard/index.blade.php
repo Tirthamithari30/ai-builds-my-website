@@ -216,6 +216,18 @@
 
                                         <!-- Actions -->
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-xs font-medium space-x-2">
+                                            @if ($site)
+                                                <a href="{{ route('websites.preview', $site) }}"
+                                                    class="inline-flex items-center px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100 transition-colors font-semibold">
+                                                    Preview
+                                                </a>
+                                            @else
+                                                <a href="{{ route('businesses.website.setup', $b) }}"
+                                                    class="inline-flex items-center px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-700 hover:bg-indigo-100 transition-colors font-semibold">
+                                                    Generate
+                                                </a>
+                                            @endif
+
                                             <a href="{{ route('businesses.show', $b) }}"
                                                 class="inline-flex items-center px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-100 transition-colors font-semibold">
                                                 View

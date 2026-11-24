@@ -52,6 +52,25 @@
                         <span>Verify Facts & Conflicts</span>
                     </a>
 
+                    @if ($business->latestWebsite)
+                        <a href="{{ route('websites.preview', $business->latestWebsite) }}"
+                            class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-emerald-600 text-white hover:bg-emerald-700 shadow-xs transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                            <span>Preview Website</span>
+                        </a>
+                    @else
+                        <a href="{{ route('businesses.website.setup', $business) }}"
+                            class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-emerald-600 text-white hover:bg-emerald-700 shadow-xs transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                            <span>Generate Website</span>
+                        </a>
+                    @endif
+
                     <a href="{{ route('businesses.edit', $business) }}"
                         class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 shadow-2xs transition-colors">
                         <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -217,16 +236,22 @@
                             </div>
                         </a>
 
-                        <!-- Step 4: AI Generation & Publishing (Phase 5-7) -->
-                        <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50 flex items-start gap-3">
-                            <div class="w-6 h-6 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">
+                        <!-- Step 4: AI Generation & Preview (Phase 5) -->
+                        <a href="{{ $business->latestWebsite ? route('websites.preview', $business->latestWebsite) : route('businesses.website.setup', $business) }}"
+                            class="p-3.5 rounded-xl border border-emerald-200 bg-emerald-50/50 hover:bg-emerald-50 hover:border-emerald-300 transition-all flex items-start gap-3 block group">
+                            <div class="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">
                                 4
                             </div>
                             <div>
-                                <div class="text-xs font-bold text-slate-800">Step 4: Generate & Publish Website</div>
-                                <div class="text-[11px] text-slate-500 mt-0.5">Generate tailored sections and publish to a unique URL.</div>
+                                <div class="text-xs font-bold text-emerald-900 group-hover:underline flex items-center gap-1.5">
+                                    <span>Step 4: AI Website Generation</span>
+                                    <span>→</span>
+                                </div>
+                                <div class="text-[11px] text-emerald-700 mt-0.5">
+                                    {{ $business->latestWebsite ? 'Preview and manage generated website sections.' : 'Generate website using confirmed facts and custom styles.' }}
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
 
