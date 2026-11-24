@@ -160,9 +160,14 @@ class WebsitePublishingController extends Controller
         $settings = $website->settings ?? [];
         if (!empty($validated['seo_title'])) {
             $settings['seo_title'] = $validated['seo_title'];
+        } else {
+            unset($settings['seo_title']);
         }
+
         if (!empty($validated['og_image'])) {
             $settings['og_image'] = $validated['og_image'];
+        } else {
+            unset($settings['og_image']);
         }
 
         $website->update([

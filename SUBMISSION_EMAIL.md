@@ -46,7 +46,7 @@ The application autonomously transforms raw business details, uploaded documents
    - Comprehensive SEO metadata including canonical links, `robots: index, follow`, Open Graph, and Twitter Cards.
    - Strict privacy enforcement: unpublished drafts immediately return an HTTP `404 Not Found` to anonymous visitors.
 6. **100% Automated Test Coverage:**
-   - **89 automated tests** with **485 assertions**, all passing (100% green).
+   - **102 automated tests** with **552 assertions**, all passing (100% green).
 
 ---
 
