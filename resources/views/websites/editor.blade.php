@@ -180,6 +180,38 @@
                     </svg>
                     <span>Refresh Preview</span>
                 </button>
+
+                @if ($website->is_published)
+                    <a href="{{ url('/sites/' . $website->slug) }}" target="_blank"
+                       class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-emerald-600/30 text-emerald-300 border border-emerald-500/50 hover:bg-emerald-600/40 transition-colors shadow-xs flex items-center gap-1.5"
+                       title="Open Live Public Website">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                        <span>Live Site</span>
+                    </a>
+
+                    <form method="POST" action="{{ route('websites.unpublish', $website) }}"
+                          onsubmit="return confirm('Take website offline? Visitors will receive a 404 until republished.');"
+                          class="inline">
+                        @csrf
+                        <button type="submit"
+                                class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-rose-600/20 text-rose-300 border border-rose-500/40 hover:bg-rose-600/30 transition-colors flex items-center gap-1">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg>
+                            <span>Unpublish</span>
+                        </button>
+                    </form>
+                @else
+                    <form method="POST" action="{{ route('websites.publish', $website) }}"
+                          onsubmit="return confirm('Publish this website live to /sites/{{ $website->slug }}?');"
+                          class="inline">
+                        @csrf
+                        <button type="submit"
+                                class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white transition-all shadow-md flex items-center gap-1.5"
+                                title="Publish website live to the public">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            <span>Publish Live</span>
+                        </button>
+                    </form>
+                @endif
             </div>
         </header>
 
@@ -214,6 +246,15 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                         </svg>
                         <span>Images ({{ $uploadedImages->count() }})</span>
+                    </button>
+
+                    <button type="button" @click="activeTab = 'publish'"
+                            class="flex-1 py-3 text-center border-b-2 transition-all flex items-center justify-center gap-1.5"
+                            :class="activeTab === 'publish' ? 'border-blue-500 text-white bg-slate-950' : 'border-transparent hover:text-slate-200'">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+                        </svg>
+                        <span>Publish & SEO</span>
                     </button>
                 </div>
 
@@ -588,6 +629,192 @@
                             @endforeach
                         </div>
                     @endif
+                </div>
+
+                <!-- Tab 4: Public Website Publishing & SEO (Phase 7) -->
+                <div x-show="activeTab === 'publish'" style="display: none;" class="flex-1 overflow-y-auto p-4 space-y-5 text-xs">
+                    <!-- 1. Publication Status Card -->
+                    <div class="p-4 rounded-xl border {{ $website->is_published ? 'bg-emerald-950/40 border-emerald-800/60' : 'bg-slate-900 border-slate-800' }} space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold uppercase tracking-wider text-slate-300">Publication Status</span>
+                            @if ($website->is_published)
+                                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 flex items-center gap-1.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                                    Live to the Public
+                                </span>
+                            @else
+                                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                                    Private Draft
+                                </span>
+                            @endif
+                        </div>
+
+                        @if ($website->is_published)
+                            <div class="space-y-1">
+                                <span class="text-[11px] text-slate-400">Live Public URL:</span>
+                                <div class="p-2 rounded-lg bg-slate-950 border border-slate-800 flex items-center justify-between gap-2">
+                                    <a href="{{ url('/sites/' . $website->slug) }}" target="_blank"
+                                       class="font-mono text-emerald-400 hover:text-emerald-300 truncate text-[11px] hover:underline">
+                                        {{ url('/sites/' . $website->slug) }}
+                                    </a>
+                                    <button type="button"
+                                            @click="navigator.clipboard.writeText('{{ url('/sites/' . $website->slug) }}'); alert('Public URL copied to clipboard!');"
+                                            class="px-2 py-1 rounded bg-slate-800 text-slate-300 hover:text-white text-[10px] flex-shrink-0 transition-colors">
+                                        Copy
+                                    </button>
+                                </div>
+                                <p class="text-[10px] text-slate-500 pt-1">
+                                    Published: {{ $website->published_at ? $website->published_at->format('M d, Y • H:i') : 'Recently' }}
+                                </p>
+                            </div>
+
+                            <form method="POST" action="{{ route('websites.unpublish', $website) }}"
+                                  onsubmit="return confirm('Take website offline? Visitors will receive a 404 until republished.');">
+                                @csrf
+                                <button type="submit"
+                                        class="w-full py-2 rounded-xl text-xs font-semibold bg-rose-600/20 text-rose-300 border border-rose-500/40 hover:bg-rose-600/30 transition-colors">
+                                    Unpublish Website (Take Offline)
+                                </button>
+                            </form>
+                        @else
+                            <p class="text-slate-400 text-[11px]">
+                                Your website is currently private. Anonymous visitors will receive a 404 Not Found error until you publish.
+                            </p>
+
+                            @if ($publishingValidation['is_valid'])
+                                <form method="POST" action="{{ route('websites.publish', $website) }}"
+                                      onsubmit="return confirm('Publish this website live to /sites/{{ $website->slug }}?');">
+                                    @csrf
+                                    <button type="submit"
+                                            class="w-full py-2.5 rounded-xl font-bold text-xs bg-emerald-600 hover:bg-emerald-500 text-white shadow-md transition-colors flex items-center justify-center gap-1.5">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                        <span>Publish Website Live</span>
+                                    </button>
+                                </form>
+                            @else
+                                <div class="p-2.5 rounded-lg bg-rose-950/40 border border-rose-800/60 text-rose-300 text-[11px] space-y-1">
+                                    <div class="font-bold flex items-center gap-1.5">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                                        Publishing Blocked
+                                    </div>
+                                    <ul class="list-disc list-inside space-y-0.5 text-[10px]">
+                                        @foreach ($publishingValidation['errors'] as $err)
+                                            <li>{{ $err }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                        @endif
+                    </div>
+
+                    <!-- 2. Pre-Flight Validation Checklist -->
+                    <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-300">Pre-Flight Quality Checklist</span>
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between text-[11px]">
+                                <span class="text-slate-400">Business Name:</span>
+                                @if (!empty(trim($business->name ?? '')))
+                                    <span class="text-emerald-400 font-semibold flex items-center gap-1">✓ {{ $business->name }}</span>
+                                @else
+                                    <span class="text-rose-400 font-semibold">✗ Missing</span>
+                                @endif
+                            </div>
+                            <div class="flex items-center justify-between text-[11px]">
+                                <span class="text-slate-400">Visible Sections:</span>
+                                @php $visCount = $sections->where('is_visible', true)->count(); @endphp
+                                @if ($visCount > 0)
+                                    <span class="text-emerald-400 font-semibold flex items-center gap-1">✓ {{ $visCount }} sections</span>
+                                @else
+                                    <span class="text-rose-400 font-semibold">✗ 0 visible</span>
+                                @endif
+                            </div>
+                            <div class="flex items-center justify-between text-[11px]">
+                                <span class="text-slate-400">Fact Conflicts:</span>
+                                @if ($publishingValidation['is_valid'])
+                                    <span class="text-emerald-400 font-semibold flex items-center gap-1">✓ No conflicts</span>
+                                @else
+                                    <a href="{{ route('businesses.facts.index', $business) }}" class="text-rose-400 hover:underline font-semibold flex items-center gap-1">
+                                        Review Facts →
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Custom Vanity URL Slug Editor -->
+                    <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-3">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-slate-300">Vanity URL Slug</span>
+                            <p class="text-[11px] text-slate-400 mt-0.5">Customize the public web address for your website.</p>
+                        </div>
+
+                        <form method="POST" action="{{ route('websites.slug.update', $website) }}" class="space-y-3">
+                            @csrf
+                            @method('PUT')
+                            <div>
+                                <label class="text-[11px] text-slate-400 block mb-1">Public URL Slug</label>
+                                <div class="flex items-center rounded-lg border border-slate-800 bg-slate-950 overflow-hidden text-xs">
+                                    <span class="px-2.5 py-1.5 text-slate-500 font-mono select-none bg-slate-900 border-r border-slate-800">
+                                        /sites/
+                                    </span>
+                                    <input type="text" name="slug" value="{{ old('slug', $website->slug) }}" required minlength="3" maxlength="80"
+                                           class="flex-1 bg-transparent px-2.5 py-1.5 text-white font-mono focus:outline-hidden focus:ring-1 focus:ring-blue-500">
+                                </div>
+                                <span class="text-[10px] text-slate-500 mt-1 block">3–80 characters, lowercase letters, numbers, and hyphens.</span>
+                            </div>
+
+                            <button type="submit"
+                                    class="w-full py-2 rounded-xl text-xs font-semibold bg-blue-600 hover:bg-blue-700 text-white transition-colors">
+                                Update URL Slug
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- 4. SEO & Social Sharing Metadata -->
+                    <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-3">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-slate-300">SEO & Social Sharing</span>
+                            <p class="text-[11px] text-slate-400 mt-0.5">Control how your website appears on Google, WhatsApp, Facebook, and Twitter.</p>
+                        </div>
+
+                        <form method="POST" action="{{ route('websites.seo.update', $website) }}" class="space-y-3">
+                            @csrf
+                            @method('PUT')
+
+                            <div>
+                                <label class="text-[11px] text-slate-400 block mb-1">Custom SEO Title</label>
+                                <input type="text" name="seo_title"
+                                       value="{{ old('seo_title', $website->settings['seo_title'] ?? '') }}"
+                                       placeholder="{{ $website->title }} — {{ $business->city ?? 'Official Website' }}"
+                                       maxlength="120"
+                                       class="w-full px-2.5 py-1.5 rounded-lg border border-slate-800 bg-slate-950 text-white focus:outline-hidden focus:ring-1 focus:ring-blue-500">
+                                <span class="text-[10px] text-slate-500 mt-0.5 block">Recommended length: 50–60 characters.</span>
+                            </div>
+
+                            <div>
+                                <label class="text-[11px] text-slate-400 block mb-1">Meta Description <span class="text-rose-400">*</span></label>
+                                <textarea name="meta_description" rows="3" required maxlength="200"
+                                          placeholder="A compelling, fact-accurate summary of your business..."
+                                          class="w-full px-2.5 py-1.5 rounded-lg border border-slate-800 bg-slate-950 text-white focus:outline-hidden focus:ring-1 focus:ring-blue-500">{{ old('meta_description', $website->meta_description) }}</textarea>
+                                <span class="text-[10px] text-slate-500 mt-0.5 block">Recommended length: 140–160 characters (Max 200).</span>
+                            </div>
+
+                            <div>
+                                <label class="text-[11px] text-slate-400 block mb-1">Open Graph Social Image URL</label>
+                                <input type="url" name="og_image"
+                                       value="{{ old('og_image', $website->settings['og_image'] ?? '') }}"
+                                       placeholder="https://example.com/cover.jpg"
+                                       maxlength="255"
+                                       class="w-full px-2.5 py-1.5 rounded-lg border border-slate-800 bg-slate-950 text-white focus:outline-hidden focus:ring-1 focus:ring-blue-500">
+                                <span class="text-[10px] text-slate-500 mt-0.5 block">Preview image displayed when link is shared on social media.</span>
+                            </div>
+
+                            <button type="submit"
+                                    class="w-full py-2 rounded-xl text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 text-white transition-colors">
+                                Save SEO & Social Metadata
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </aside>
 

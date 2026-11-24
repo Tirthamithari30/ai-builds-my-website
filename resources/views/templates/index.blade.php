@@ -3,8 +3,42 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $website->title }} — {{ $website->settings['tagline'] ?? $business->name }}</title>
+
+    @php
+        $pageTitle = $website->settings['seo_title'] ?? ($website->title . ' — ' . ($website->settings['tagline'] ?? $business->name));
+        $canonicalUrl = url('/sites/' . $website->slug);
+        $heroSec = $sections->firstWhere('section_type', 'hero');
+        $ogImage = $website->settings['og_image'] ?? ($heroSec->content['hero_image'] ?? null);
+        $isLive = $website->is_published;
+    @endphp
+
+    <title>{{ $pageTitle }}</title>
     <meta name="description" content="{{ $website->meta_description }}">
+    <link rel="canonical" href="{{ $canonicalUrl }}">
+
+    @if ($isLive)
+        <meta name="robots" content="index, follow">
+    @else
+        <meta name="robots" content="noindex, nofollow">
+    @endif
+
+    <!-- Open Graph Metadata -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ $pageTitle }}">
+    <meta property="og:description" content="{{ $website->meta_description }}">
+    <meta property="og:url" content="{{ $canonicalUrl }}">
+    <meta property="og:site_name" content="{{ $business->name }}">
+    @if ($ogImage)
+        <meta property="og:image" content="{{ $ogImage }}">
+    @endif
+
+    <!-- Twitter Card Metadata -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $pageTitle }}">
+    <meta name="twitter:description" content="{{ $website->meta_description }}">
+    @if ($ogImage)
+        <meta name="twitter:image" content="{{ $ogImage }}">
+    @endif
 
     <!-- Google Fonts for Selected Preset -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

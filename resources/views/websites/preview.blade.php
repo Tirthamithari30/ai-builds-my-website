@@ -44,9 +44,28 @@
                                 Verified Engine
                             </span>
                         @endif
+
+                        @if ($website->is_published)
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 flex items-center gap-1">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                                Published Live
+                            </span>
+                        @else
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                                Draft
+                            </span>
+                        @endif
                     </div>
-                    <div class="text-[11px] text-slate-400">
-                        {{ $sections->count() }} active sections • {{ $business->name }}
+                    <div class="text-[11px] text-slate-400 flex items-center gap-2">
+                        <span>{{ $sections->count() }} active sections • {{ $business->name }}</span>
+                        @if ($website->is_published)
+                            <span class="text-slate-600">•</span>
+                            <a href="{{ url('/sites/' . $website->slug) }}" target="_blank"
+                               class="text-blue-400 hover:text-blue-300 hover:underline flex items-center gap-1 font-mono">
+                                <span>/sites/{{ $website->slug }}</span>
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -118,6 +137,39 @@
                     </svg>
                     <span>Regenerate</span>
                 </a>
+
+                @if ($website->is_published)
+                    <a href="{{ url('/sites/' . $website->slug) }}" target="_blank"
+                       class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-emerald-600/30 text-emerald-300 border border-emerald-500/50 hover:bg-emerald-600/40 transition-colors shadow-xs flex items-center gap-1.5"
+                       title="Open Live Website">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                        <span>View Live</span>
+                    </a>
+
+                    <form method="POST" action="{{ route('websites.unpublish', $website) }}"
+                          onsubmit="return confirm('Are you sure you want to take this website offline? Visitors will receive a 404 until you publish it again.');"
+                          class="inline">
+                        @csrf
+                        <button type="submit"
+                                class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-rose-600/20 text-rose-300 border border-rose-500/40 hover:bg-rose-600/30 transition-colors shadow-xs flex items-center gap-1.5"
+                                title="Unpublish and return to private draft">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg>
+                            <span>Unpublish</span>
+                        </button>
+                    </form>
+                @else
+                    <form method="POST" action="{{ route('websites.publish', $website) }}"
+                          onsubmit="return confirm('Publish this website live to /sites/{{ $website->slug }}?');"
+                          class="inline">
+                        @csrf
+                        <button type="submit"
+                                class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white transition-all shadow-md flex items-center gap-1.5"
+                                title="Publish website live to the public">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            <span>Publish Live</span>
+                        </button>
+                    </form>
+                @endif
             </div>
         </div>
 

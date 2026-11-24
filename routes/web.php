@@ -9,12 +9,16 @@ use App\Http\Controllers\FactVerificationController;
 use App\Http\Controllers\UploadedFileController;
 use App\Http\Controllers\WebsiteEditorController;
 use App\Http\Controllers\WebsiteGenerationController;
+use App\Http\Controllers\WebsitePublishingController;
 use Illuminate\Support\Facades\Route;
 
 // Public Landing Page
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
+
+// Public Published Websites (Phase 7)
+Route::get('/sites/{slug}', [WebsitePublishingController::class, 'showPublic'])->name('sites.show');
 
 // Guest Authentication Routes
 Route::middleware('guest')->group(function () {
@@ -75,4 +79,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/sections/{section}/apply-regeneration', [WebsiteEditorController::class, 'applySectionRegeneration'])->name('sections.apply-regeneration');
     Route::put('/websites/{website}/design', [WebsiteEditorController::class, 'updateDesign'])->name('websites.design.update');
     Route::post('/websites/{website}/save-all', [WebsiteEditorController::class, 'saveAll'])->name('websites.save-all');
+
+    // Website Publishing & SEO (Phase 7)
+    Route::post('/websites/{website}/publish', [WebsitePublishingController::class, 'publish'])->name('websites.publish');
+    Route::post('/websites/{website}/unpublish', [WebsitePublishingController::class, 'unpublish'])->name('websites.unpublish');
+    Route::put('/websites/{website}/slug', [WebsitePublishingController::class, 'updateSlug'])->name('websites.slug.update');
+    Route::put('/websites/{website}/seo', [WebsitePublishingController::class, 'updateSeo'])->name('websites.seo.update');
 });

@@ -57,6 +57,8 @@ class WebsiteEditorController extends Controller
             "system-ui, -apple-system, sans-serif" => 'System Native',
         ];
 
+        $publishingValidation = $this->publishingService->validateForPublishing($website);
+
         return view('websites.editor', [
             'website' => $website,
             'business' => $website->business,
@@ -67,6 +69,7 @@ class WebsiteEditorController extends Controller
             'verifiedDict' => $verifiedDict,
             'fonts' => $fonts,
             'uploadedImages' => $website->business->files,
+            'publishingValidation' => $publishingValidation,
         ]);
     }
 

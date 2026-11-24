@@ -112,8 +112,9 @@ class FactVerificationService
 
             // 2. Conflict detection across active candidate facts
             $distinctValues = $activeCandidates->pluck('fact_value')->map(fn($v) => trim((string)$v))->unique();
+            $hasExplicitConflict = $activeCandidates->contains('verification_status', 'conflicting');
 
-            if ($distinctValues->count() > 1) {
+            if ($distinctValues->count() > 1 || $hasExplicitConflict) {
                 $conflicts[$key] = [
                     'fact_key' => $key,
                     'fact_name' => $label,
@@ -184,7 +185,8 @@ class FactVerificationService
             }
 
             $distinct = $active->pluck('fact_value')->map(fn($v) => trim((string)$v))->unique();
-            if ($distinct->count() > 1) {
+            $hasExplicitConflict = $active->contains('verification_status', 'conflicting');
+            if ($distinct->count() > 1 || $hasExplicitConflict) {
                 $conflicts[$key] = [
                     'fact_key' => $key,
                     'fact_name' => $active->first()->fact_name ?? ucwords(str_replace('_', ' ', $key)),
