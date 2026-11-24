@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full bg-slate-50">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI Builds My Website | Your Business. Your Information. Your Website.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+<body class="min-h-full flex flex-col font-sans text-slate-800 antialiased selection:bg-blue-600 selection:text-white">
+    <!-- Top Announcement Bar -->
+    <div class="bg-slate-900 text-slate-300 px-4 py-2 text-xs font-medium text-center border-b border-slate-800">
+        <span class="inline-flex items-center gap-1.5">
+            <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            Technical Assignment for Websites.co.in • Phase 1 Architecture Active
+        </span>
+    </div>
+
+    <!-- Main Navigation -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200/80 shadow-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-white shadow-sm font-bold text-lg tracking-tight">
+                    AI
+                </div>
+                <div>
+                    <span class="text-lg font-bold text-slate-900 tracking-tight">AI Builds My Website</span>
+                    <span class="hidden sm:inline-block text-xs text-slate-500 ml-2 font-medium">| Your Business. Your Information. Your Website.</span>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <a href="#architecture" class="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors">Architecture</a>
+                <a href="#services" class="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors">Services</a>
+                <a href="#verification" class="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors">Verification</a>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">
+                    Phase 1 Ready
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="flex-grow">
+        <section class="relative pt-16 pb-20 overflow-hidden bg-gradient-to-b from-white to-slate-50 border-b border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200/80 mb-6">
+                        <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                        Strict Grounded AI • Zero Invention of Facts
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                        Transform Business Information into a <span class="text-blue-600">Professional Website</span> with AI.
+                    </h1>
+
+                    <p class="mt-6 text-lg text-slate-600 leading-relaxed">
+                        Never invent business facts. Our multi-stage verification engine extracts data from PDFs, online sources, and listings, detects conflicts, requires user confirmation, and compiles verified websites into tailored design presets.
+                    </p>
+
+                    <!-- Real Environment & Architectural Metrics -->
+                    <div class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 text-left">
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs">
+                            <div class="text-xs font-medium text-slate-500 uppercase tracking-wider">Backend</div>
+                            <div class="mt-1 text-lg font-bold text-slate-900">Laravel 13</div>
+                            <div class="text-xs text-emerald-600 font-semibold mt-0.5">● PHP 8.4 CLI</div>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs">
+                            <div class="text-xs font-medium text-slate-500 uppercase tracking-wider">Database</div>
+                            <div class="mt-1 text-lg font-bold text-slate-900">MySQL 8.0</div>
+                            <div class="text-xs text-emerald-600 font-semibold mt-0.5">● 9 Domain Tables</div>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs">
+                            <div class="text-xs font-medium text-slate-500 uppercase tracking-wider">Frontend</div>
+                            <div class="mt-1 text-lg font-bold text-slate-900">Tailwind & Alpine</div>
+                            <div class="text-xs text-emerald-600 font-semibold mt-0.5">● Compiled via Vite</div>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs">
+                            <div class="text-xs font-medium text-slate-500 uppercase tracking-wider">AI Engine</div>
+                            <div class="mt-1 text-lg font-bold text-slate-900">Google Gemini</div>
+                            <div class="text-xs text-blue-600 font-semibold mt-0.5">● Prompt-Hardened</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Architecture Section -->
+        <section id="architecture" class="py-16 bg-white border-b border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-2xl">
+                    <span class="text-xs font-bold uppercase tracking-wider text-blue-600">Modular MVC Architecture</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-2">Dedicated Domain Service Layer</h2>
+                    <p class="text-slate-600 mt-2 text-sm">
+                        All business logic is isolated into dedicated service classes instead of bloated controllers, guaranteeing security, testability, and deterministic data flow.
+                    </p>
+                </div>
+
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Service 1: AiService -->
+                    <div class="p-5 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-white hover:border-blue-200 hover:shadow-sm transition-all">
+                        <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-sm mb-3">
+                            01
+                        </div>
+                        <h3 class="font-bold text-slate-900">AiService</h3>
+                        <p class="text-xs text-slate-500 mt-1 font-mono">App\Services\AiService</p>
+                        <p class="text-sm text-slate-600 mt-2">
+                            Secure Google Gemini API integration with prompt injection defenses, JSON schema validation, timeout retries, and strict instructions forbidding instruction override.
+                        </p>
+                    </div>
+
+                    <!-- Service 2: PdfProcessingService -->
+                    <div class="p-5 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-white hover:border-blue-200 hover:shadow-sm transition-all">
+                        <div class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-sm mb-3">
+                            02
+                        </div>
+                        <h3 class="font-bold text-slate-900">PdfProcessingService</h3>
+                        <p class="text-xs text-slate-500 mt-1 font-mono">App\Services\PdfProcessingService</p>
+                        <p class="text-sm text-slate-600 mt-2">
+                            Pure-PHP PDF text and metadata extraction via Smalot\PdfParser. Includes automatic detection of scanned/empty documents with transparent OCR limitations.
+                        </p>
+                    </div>
+
+                    <!-- Service 3: WebResearchService -->
+                    <div class="p-5 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-white hover:border-blue-200 hover:shadow-sm transition-all">
+                        <div class="w-8 h-8 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-sm mb-3">
+                            03
+                        </div>
+                        <h3 class="font-bold text-slate-900">WebResearchService</h3>
+                        <p class="text-xs text-slate-500 mt-1 font-mono">App\Services\WebResearchService</p>
+                        <p class="text-sm text-slate-600 mt-2">
+                            SSRF-protected webpage reader and search provider integration. Blocks private IP ranges (RFC 1918) and cloud metadata (169.254.169.254) with graceful handling of 403 blocks.
+                        </p>
+                    </div>
+
+                    <!-- Service 4: SourceExtractionService -->
+                    <div class="p-5 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-white hover:border-blue-200 hover:shadow-sm transition-all">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm mb-3">
+                            04
+                        </div>
+                        <h3 class="font-bold text-slate-900">SourceExtractionService</h3>
+                        <p class="text-xs text-slate-500 mt-1 font-mono">App\Services\SourceExtractionService</p>
+                        <p class="text-sm text-slate-600 mt-2">
+                            Extracts and stores candidate facts from uploaded documents, Google Business links, and websites, pairing AI extraction with deterministic regex heuristics.
+                        </p>
+                    </div>
+
+                    <!-- Service 5: FactVerificationService -->
+                    <div class="p-5 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-white hover:border-blue-200 hover:shadow-sm transition-all">
+                        <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-sm mb-3">
+                            05
+                        </div>
+                        <h3 class="font-bold text-slate-900">FactVerificationService</h3>
+                        <p class="text-xs text-slate-500 mt-1 font-mono">App\Services\FactVerificationService</p>
+                        <p class="text-sm text-slate-600 mt-2">
+                            Multi-source conflict detection (e.g. Google listing vs Business Website phone numbers). Manages statuses (extracted, source-supported, user-confirmed, conflicting, missing).
+                        </p>
+                    </div>
+
+                    <!-- Service 6: WebsiteGenerationService -->
+                    <div class="p-5 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-white hover:border-blue-200 hover:shadow-sm transition-all">
+                        <div class="w-8 h-8 rounded-lg bg-violet-100 text-violet-700 flex items-center justify-center font-bold text-sm mb-3">
+                            06
+                        </div>
+                        <h3 class="font-bold text-slate-900">WebsiteGenerationService</h3>
+                        <p class="text-xs text-slate-500 mt-1 font-mono">App\Services\WebsiteGenerationService</p>
+                        <p class="text-sm text-slate-600 mt-2">
+                            Structured JSON section compiler supporting 3 presets (Modern Minimal, Premium Elegant, Bold Creative) and granular per-section regeneration without touching existing edits.
+                        </p>
+                    </div>
+
+                    <!-- Service 7: WebsitePublishingService -->
+                    <div class="p-5 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-white hover:border-blue-200 hover:shadow-sm transition-all md:col-span-2 lg:col-span-3">
+                        <div class="w-8 h-8 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center font-bold text-sm mb-3">
+                            07
+                        </div>
+                        <h3 class="font-bold text-slate-900">WebsitePublishingService</h3>
+                        <p class="text-xs text-slate-500 mt-1 font-mono">App\Services\WebsitePublishingService</p>
+                        <p class="text-sm text-slate-600 mt-2">
+                            Public website deployment engine with automated collision-safe slug generation (/sites/{slug}), immutable snapshot version history, and draft privacy enforcement.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Alpine.js Demonstration Component -->
+        <section id="verification" class="py-16 bg-slate-50 border-b border-slate-200" x-data="{ activeTab: 'conflict' }">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-3xl">
+                    <span class="text-xs font-bold uppercase tracking-wider text-blue-600">Principle Demonstration</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-2">How Conflict Resolution Works</h2>
+                    <p class="text-slate-600 mt-2 text-sm">
+                        When multiple sources report different information, the application never guesses or hallucinates. It presents the conflict directly to the user for definitive confirmation.
+                    </p>
+                </div>
+
+                <div class="mt-8 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+                    <div class="flex border-b border-slate-200 bg-slate-50/80 px-4 py-2 gap-2 text-xs font-semibold">
+                        <button @click="activeTab = 'conflict'" :class="activeTab === 'conflict' ? 'bg-white text-blue-600 shadow-xs border border-slate-200' : 'text-slate-600 hover:text-slate-900'" class="px-3 py-1.5 rounded-lg transition-all">
+                            Example: Phone Number Conflict
+                        </button>
+                        <button @click="activeTab = 'scanned'" :class="activeTab === 'scanned' ? 'bg-white text-blue-600 shadow-xs border border-slate-200' : 'text-slate-600 hover:text-slate-900'" class="px-3 py-1.5 rounded-lg transition-all">
+                            Example: Scanned PDF Detection
+                        </button>
+                    </div>
+
+                    <div class="p-6">
+                        <div x-show="activeTab === 'conflict'" class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800">
+                                        Conflicting Fact Detected
+                                    </span>
+                                    <span class="text-sm font-bold text-slate-900">Phone Number</span>
+                                </div>
+                                <span class="text-xs text-slate-500">2 Sources Found</span>
+                            </div>
+
+                            <p class="text-sm text-slate-600">
+                                Multiple phone numbers were extracted from your submitted sources. Which one should be published on your official website?
+                            </p>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="p-4 rounded-xl border-2 border-slate-200 hover:border-blue-500 cursor-pointer transition-all bg-slate-50/50">
+                                    <div class="text-xs text-slate-500 font-medium">Source: Google Business Listing</div>
+                                    <div class="text-lg font-bold text-slate-900 mt-1">+91 98220 12345</div>
+                                    <div class="text-xs text-slate-500 mt-2">Confidence: 92% • Extracted via Search</div>
+                                </div>
+
+                                <div class="p-4 rounded-xl border-2 border-slate-200 hover:border-blue-500 cursor-pointer transition-all bg-slate-50/50">
+                                    <div class="text-xs text-slate-500 font-medium">Source: Brochure PDF (Menu.pdf)</div>
+                                    <div class="text-lg font-bold text-slate-900 mt-1">+91 98220 54321</div>
+                                    <div class="text-xs text-slate-500 mt-2">Confidence: 96% • Extracted via PDF Parser</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div x-show="activeTab === 'scanned'" class="space-y-4" style="display: none;">
+                            <div class="flex items-center gap-2">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-rose-100 text-rose-800">
+                                    Scanned Image PDF Detected
+                                </span>
+                                <span class="text-sm font-bold text-slate-900">PriceList_Scan.pdf</span>
+                            </div>
+
+                            <div class="p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-sm">
+                                <strong>Honest OCR Communication:</strong> This document contains raster image pages with 0 selectable text characters. Rather than fabricating placeholder data, the system flags <code class="text-xs bg-amber-100 px-1 py-0.5 rounded">scanned_ocr_required</code> and invites the user to enter prices manually or upload a text-based document.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="text-sm text-slate-500">
+                © {{ date('Y') }} <strong>AI Builds My Website</strong>. Technical Internship Project for Websites.co.in.
+            </div>
+            <div class="flex items-center gap-6 text-sm text-slate-500 font-medium">
+                <span>Phase 1: Environment & Architecture</span>
+                <span class="text-slate-300">•</span>
+                <span class="text-emerald-600 font-semibold">Ready for Phase 2</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
