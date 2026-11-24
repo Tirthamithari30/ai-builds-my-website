@@ -6,7 +6,7 @@
 [![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://mysql.com)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.x-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 [![Google Gemini](https://img.shields.io/badge/Google_Gemini-2.5_Flash-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
-[![Tests Passing](https://img.shields.io/badge/Tests-102%20Passed%20(100%25)-success?style=for-the-badge)](tests)
+[![Tests Passing](https://img.shields.io/badge/Tests-115%20Passed%20(100%25)-success?style=for-the-badge)](tests)
 
 > **Developed for Websites.co.in Technical Internship Assignment**  
 > An enterprise-grade, end-to-end full-stack SaaS web application that autonomously converts raw business information, uploaded documents (PDF, DOCX, TXT), and public online sources into verified, customizable, and publishable business websites using **Google Gemini AI**.
@@ -266,16 +266,17 @@ Visit the application in your browser at:
 
 ## Automated Test Suite
 
-The application includes an extensive, end-to-end automated test suite covering all 8 phases:
-- Authentication & Session Management
-- Business Ownership & Data Isolation Policies
-- Document Upload Validation & Extraction
-- SSRF Filtering & Web Crawling
-- Fact Extraction & Conflict Resolution
-- Gemini Website Generation Engine & Grounding
-- Visual Editor, Regeneration, & Snapshot Versioning
-- Public Website Publishing, Vanity Slugs, & 404 Privacy
-- Multi-Business Real-World End-to-End Lifecycles
+The application includes an extensive, end-to-end automated test suite covering all 10 completed phases:
+- Authentication, Rate Limiting & Session Management
+- Business Ownership & Granular Policy Isolation
+- Document Upload Validation & Multi-Format Parsing
+- Outbound Web Crawler with SSRF & Multi-Hop Redirect Defense
+- Fact Extraction, Evidence Grounding & Conflict Resolution
+- Gemini 2.5 Flash Website Generation Engine with Resilient Offline Fallback
+- Visual Editor, AI Section Regeneration & Immutable Version Snapshots
+- Public Website Publishing, Unique Vanity Slugs, SEO Tags & 404 Draft Isolation
+- Multi-Business Real-World End-to-End Verification
+- Complete Application Security Audit & Defensive Hardening
 
 ### Run All Tests
 ```bash
@@ -293,10 +294,11 @@ php artisan test
    PASS  Tests\Feature\PhaseSevenWebsitePublishingTest (14 tests, 67 assertions)
    PASS  Tests\Feature\PhaseEightEndToEndIntegrationTest (2 tests, 69 assertions)
    PASS  Tests\Feature\PhaseNineSystemTestingAndBugFixingTest (13 tests, 67 assertions)
+   PASS  Tests\Feature\PhaseTenSecurityAuditTest (13 tests, 71 assertions)
 
-Tests:    102 passed (102 total)
-Assertions: 552
-Duration: 8.61s
+Tests:    115 passed (115 total)
+Assertions: 623
+Duration: ~10.6s
 Result:   100% PASSING
 ```
 
@@ -304,11 +306,12 @@ Result:   100% PASSING
 
 ## Security & Defensive Hardening
 
-- **SSRF Defense**: The crawler resolves DNS before initiating requests and strictly blocks private IP ranges (`10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`), loopback (`127.0.0.1`, `::1`), and cloud metadata (`169.254.169.254`).
-- **File Upload Protection**: Enforces server-side MIME type inspection, a 15MB file ceiling, and stores files with random UUIDs in isolated per-business directories.
-- **Cross-User Data Isolation**: Every model interaction is guarded with Laravel Policies (`BusinessPolicy`, `WebsitePolicy`, `UploadedFilePolicy`, `BusinessSourcePolicy`).
-- **XSS Prevention**: All Blade user output is strictly escaped with `{{ }}`. Raw unescaped `{!! !!}` is restricted to internal sanitized CSS styles.
-- **SQL Injection Prevention**: All queries utilize Eloquent ORM and PDO prepared statements with strict parameter binding.
+- **Authentication Rate Limiting**: Built-in IP and email throttling (5 attempts/minute) on login routes to prevent brute-force credential stuffing, with automatic throttle clearance upon successful authentication.
+- **SSRF Defense with Redirect Protection**: Outbound crawler resolves DNS before initiating requests and strictly blocks private IP ranges (`10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`), loopback (`127.0.0.1`, `::1`), and cloud metadata (`169.254.169.254`). Includes Guzzle `on_redirect` validation to block multi-hop HTTP 301/302 redirects targeting internal or metadata services.
+- **File Upload Protection**: Enforces server-side MIME type inspection, a 15MB file ceiling, blocks executable extensions, and stores files with random UUIDs in isolated per-business storage.
+- **Cross-User Data Isolation (IDOR Prevention)**: Every controller interaction is guarded with Laravel Policies (`BusinessPolicy`, `WebsitePolicy`, `UploadedFilePolicy`, `BusinessSourcePolicy`), returning HTTP 403 Forbidden on any unauthorized cross-tenant attempt.
+- **XSS & CSS Breakout Prevention**: All Blade user output is strictly escaped with `{{ }}`. Dynamic CSS custom properties (`--site-font`) enforce strict alphanumeric/safe punctuation regex validation and Blade sanitization, eliminating CSS injection and breakout vectors.
+- **SQL Injection Prevention**: All database queries utilize Eloquent ORM and PDO prepared statements with strict parameter binding (zero unparameterized SQL).
 - **Prompt Injection Defense**: Untrusted text is sequestered inside `<untrusted_source_content>` wrappers with system instructions commanding the model never to interpret user data as executable instructions.
 
 ---

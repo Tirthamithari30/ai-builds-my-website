@@ -135,7 +135,20 @@ Serve published websites under `/sites/{slug}` using direct database lookups wit
 
 ---
 
-## 10. Summary
+## 10. Security Audit & Defensive Hardening (Phase 10)
+
+### Decision:
+Implement multi-layer defensive hardening across authentication rate limiting, SSRF multi-hop redirect filtering, CSS injection mitigation, and complete resource authorization coverage.
+
+### Rationale:
+1. **Brute-Force & Credential Stuffing Prevention**: Authentication endpoints (`POST /login`) throttle failed login attempts using Laravel's `RateLimiter` (5 attempts per minute per email + IP), returning HTTP 429 Too Many Requests and automatically clearing limits upon valid authentication.
+2. **SSRF Redirect Hardening**: Standard HTTP clients follow 301/302 redirects automatically, which could allow an attacker to bypass initial URL inspection by redirecting from an external server to internal loopback (`http://127.0.0.1`, `[::1]`) or AWS/GCP metadata (`http://169.254.169.254`). We attached an `on_redirect` Guzzle hook that independently validates every redirect hop against private and reserved IP filters.
+3. **CSS Context Breakout & Stored XSS**: Unescaped `{!! !!}` in CSS `<style>` blocks was hardened by enforcing strict regex validation (`/^[a-zA-Z0-9\s,\'\"\-]+$/`) on font families in `WebsiteEditorController@updateDesign` and regex sanitization in public Blade templates.
+4. **100% Policy Authorization Coverage**: Added missing `update` authorization method to `UploadedFilePolicy` ensuring non-owners cannot modify or attach uploaded files belonging to another business.
+
+---
+
+## 11. Summary
 
 Every architectural decision in **AI Builds My Website** was guided by two overarching criteria:
 1. **Authenticity & Integrity**: The system must never hallucinate, invent claims, or publish unverified contradictions.

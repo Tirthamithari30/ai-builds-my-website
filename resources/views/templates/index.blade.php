@@ -52,7 +52,7 @@
         :root {
             --color-primary: {{ $website->primary_color }};
             --color-secondary: {{ $website->secondary_color }};
-            --site-font: {!! $website->font_family !!};
+            --site-font: {!! preg_replace('/[^a-zA-Z0-9\s,\'\"\-]/', '', $website->font_family) !!};
         }
 
         body {

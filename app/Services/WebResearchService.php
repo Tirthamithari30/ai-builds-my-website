@@ -145,6 +145,19 @@ class WebResearchService
                     'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
                     'Accept-Language' => 'en-US,en;q=0.5',
                 ])
+                ->withOptions([
+                    'allow_redirects' => [
+                        'max' => 3,
+                        'protocols' => ['http', 'https'],
+                        'strict' => true,
+                        'on_redirect' => function ($request, $response, $uri) {
+                            $check = $this->validateSafeUrl((string) $uri);
+                            if (!$check['safe']) {
+                                throw new \RuntimeException("SSRF Violation: Redirect to forbidden target '{$uri}' blocked: {$check['reason']}");
+                            }
+                        },
+                    ],
+                ])
                 ->get($url);
 
             $status = $response->status();
@@ -240,18 +253,31 @@ class WebResearchService
         }
 
         $host = strtolower($parsed['host']);
+        $cleanHost = trim($host, '[]');
 
         // Block localhost and standard loopback hostnames
-        if (in_array($host, ['localhost', '127.0.0.1', '::1', '0.0.0.0'], true) ||
-            str_ends_with($host, '.localhost') ||
-            str_ends_with($host, '.internal') ||
-            str_ends_with($host, '.local')) {
+        if (in_array($cleanHost, ['localhost', '127.0.0.1', '::1', '0.0.0.0'], true) ||
+            in_array($host, ['localhost', '127.0.0.1', '::1', '[::1]', '0.0.0.0'], true) ||
+            str_ends_with($cleanHost, '.localhost') ||
+            str_ends_with($cleanHost, '.internal') ||
+            str_ends_with($cleanHost, '.local')) {
             return ['safe' => false, 'reason' => 'Access to localhost and internal hostnames is strictly forbidden.'];
         }
 
+        // Direct IP validation (IPv4 or IPv6)
+        if (filter_var($cleanHost, FILTER_VALIDATE_IP)) {
+            if (!filter_var($cleanHost, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
+                return ['safe' => false, 'reason' => 'Access to private or cloud metadata IP ranges is prohibited.'];
+            }
+            if ($cleanHost === '169.254.169.254' || str_starts_with($cleanHost, '169.254.')) {
+                return ['safe' => false, 'reason' => 'Access to cloud instance metadata is prohibited.'];
+            }
+            return ['safe' => true, 'reason' => null];
+        }
+
         // Resolve DNS and check against private / reserved IP spaces
-        $ip = gethostbyname($host);
-        if ($ip === $host && !filter_var($host, FILTER_VALIDATE_IP)) {
+        $ip = gethostbyname($cleanHost);
+        if ($ip === $cleanHost && !filter_var($cleanHost, FILTER_VALIDATE_IP)) {
             if (app()->environment('testing')) {
                 // In automated tests with Http::fake(), allow mocked test domains
                 return ['safe' => true, 'reason' => null];

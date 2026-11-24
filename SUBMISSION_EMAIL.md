@@ -30,7 +30,7 @@ The application autonomously transforms raw business details, uploaded documents
 
 1. **Robust Multi-Source Ingestion & SSRF Protection:**
    - Multi-format document parser extracting clean text from **PDFs** (via `smalot/pdfparser`), **DOCX** (via `ZipArchive`), **TXT** files, and business photos.
-   - Outbound web crawler with multi-layer **SSRF defense** blocking loopback hostnames, private RFC 1918 networks, and cloud instance metadata (`169.254.169.254`).
+   - Outbound web crawler with multi-layer **SSRF defense** blocking loopback hostnames, private RFC 1918 networks, and cloud instance metadata (`169.254.169.254`) on both initial requests and subsequent 301/302 redirect hops.
 2. **Fact Extraction & Conflict Resolution Engine:**
    - Atomic fact extraction with verbatim supporting evidence excerpts and confidence scores.
    - Automated contradiction detection that flags competing claims (e.g. conflicting phone numbers or addresses across sources) and empowers the owner to resolve discrepancies.
@@ -45,8 +45,9 @@ The application autonomously transforms raw business details, uploaded documents
    - Live public routing under unique vanity slugs (`/sites/{slug}`) with reserved keyword protection.
    - Comprehensive SEO metadata including canonical links, `robots: index, follow`, Open Graph, and Twitter Cards.
    - Strict privacy enforcement: unpublished drafts immediately return an HTTP `404 Not Found` to anonymous visitors.
-6. **100% Automated Test Coverage:**
-   - **102 automated tests** with **552 assertions**, all passing (100% green).
+6. **Defensive Security & 100% Automated Test Coverage:**
+   - Multi-layer security: authentication rate limiting (5 attempts/min), CSS injection sanitization, IDOR prevention across all models, and 100% parameterized queries.
+   - **115 automated tests** with **623 assertions**, all passing (100% green).
 
 ---
 

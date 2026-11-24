@@ -12,6 +12,11 @@ class UploadedFilePolicy
         return $user->id === $file->business->user_id;
     }
 
+    public function update(User $user, UploadedFile $file): bool
+    {
+        return $user->id === $file->business->user_id;
+    }
+
     public function delete(User $user, UploadedFile $file): bool
     {
         return $user->id === $file->business->user_id;

@@ -356,7 +356,7 @@ class WebsiteEditorController extends Controller
             'design_preset' => 'required|string|in:modern_minimal,premium_elegant,bold_creative',
             'primary_color' => ['required', 'regex:/^#[a-fA-F0-9]{6}$/'],
             'secondary_color' => ['required', 'regex:/^#[a-fA-F0-9]{6}$/'],
-            'font_family' => 'nullable|string|max:255',
+            'font_family' => ['nullable', 'string', 'max:255', 'regex:/^[a-zA-Z0-9\s,\'\"\-]+$/'],
             'button_style' => 'nullable|string|in:rounded,pill,sharp',
             'section_spacing' => 'nullable|string|in:compact,normal,spacious',
         ]);
