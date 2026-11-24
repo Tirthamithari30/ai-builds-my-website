@@ -18,9 +18,11 @@ class ExtractedFact extends Model
         'fact_key',
         'fact_name',
         'fact_value',
+        'evidence',
         'verification_status',
         'confidence_score',
         'is_confirmed',
+        'is_owner_provided',
         'user_confirmed_value',
         'extraction_time',
         'notes',
@@ -28,6 +30,7 @@ class ExtractedFact extends Model
 
     protected $casts = [
         'is_confirmed' => 'boolean',
+        'is_owner_provided' => 'boolean',
         'confidence_score' => 'float',
         'extraction_time' => 'datetime',
     ];

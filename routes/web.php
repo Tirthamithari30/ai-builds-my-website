@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\BusinessSourceController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FactVerificationController;
 use App\Http\Controllers\UploadedFileController;
 use Illuminate\Support\Facades\Route;
 
@@ -42,4 +43,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/businesses/{business}/files', [UploadedFileController::class, 'store'])->name('businesses.files.store');
     Route::delete('/files/{file}', [UploadedFileController::class, 'destroy'])->name('files.destroy');
     Route::post('/files/{file}/retry', [UploadedFileController::class, 'retry'])->name('files.retry');
+
+    // Fact Verification & Review (Phase 4)
+    Route::get('/businesses/{business}/facts', [FactVerificationController::class, 'index'])->name('businesses.facts.index');
+    Route::post('/facts/{fact}/confirm', [FactVerificationController::class, 'confirm'])->name('facts.confirm');
+    Route::put('/facts/{fact}/edit-confirm', [FactVerificationController::class, 'editAndConfirm'])->name('facts.edit-confirm');
+    Route::post('/facts/{fact}/reject', [FactVerificationController::class, 'reject'])->name('facts.reject');
+    Route::post('/facts/{fact}/outdated', [FactVerificationController::class, 'markOutdated'])->name('facts.outdated');
+    Route::post('/businesses/{business}/facts/resolve-conflict', [FactVerificationController::class, 'resolveConflict'])->name('businesses.facts.resolve-conflict');
+    Route::post('/businesses/{business}/facts/manual', [FactVerificationController::class, 'addManual'])->name('businesses.facts.manual');
+    Route::post('/businesses/{business}/facts/reextract', [FactVerificationController::class, 'reextract'])->name('businesses.facts.reextract');
 });

@@ -37,11 +37,19 @@
 
                 <div class="mt-4 sm:mt-0 flex items-center gap-2.5">
                     <a href="{{ route('businesses.sources.index', $business) }}"
-                        class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-blue-600 text-white hover:bg-blue-700 shadow-xs transition-colors">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 shadow-2xs transition-colors">
+                        <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                         </svg>
-                        <span>Manage Documents & Sources</span>
+                        <span>Documents & Sources</span>
+                    </a>
+
+                    <a href="{{ route('businesses.facts.index', $business) }}"
+                        class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-blue-600 text-white hover:bg-blue-700 shadow-xs transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                        <span>Verify Facts & Conflicts</span>
                     </a>
 
                     <a href="{{ route('businesses.edit', $business) }}"
@@ -195,15 +203,19 @@
                         </a>
 
                         <!-- Step 3: Fact Verification (Phase 4) -->
-                        <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50 flex items-start gap-3">
-                            <div class="w-6 h-6 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">
+                        <a href="{{ route('businesses.facts.index', $business) }}"
+                            class="p-3.5 rounded-xl border border-indigo-200 bg-indigo-50/50 hover:bg-indigo-50 hover:border-indigo-300 transition-all flex items-start gap-3 block group">
+                            <div class="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">
                                 3
                             </div>
                             <div>
-                                <div class="text-xs font-bold text-slate-800">Step 3: Fact Verification & Conflicts</div>
-                                <div class="text-[11px] text-slate-500 mt-0.5">Review facts and resolve conflicting candidates (Phase 4).</div>
+                                <div class="text-xs font-bold text-indigo-900 group-hover:underline flex items-center gap-1.5">
+                                    <span>Step 3: Fact Verification & Conflicts</span>
+                                    <span>→</span>
+                                </div>
+                                <div class="text-[11px] text-indigo-700 mt-0.5">Review facts, resolve conflicts, and confirm accuracy (Active).</div>
                             </div>
-                        </div>
+                        </a>
 
                         <!-- Step 4: AI Generation & Publishing (Phase 5-7) -->
                         <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50 flex items-start gap-3">
