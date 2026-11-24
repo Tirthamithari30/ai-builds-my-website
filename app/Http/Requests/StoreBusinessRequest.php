@@ -23,9 +23,9 @@ class StoreBusinessRequest extends FormRequest
             'phone' => ['nullable', 'string', 'max:50'],
             'email' => ['nullable', 'email', 'max:255'],
             'description' => ['nullable', 'string', 'max:3000'],
-            'operating_hours' => ['nullable', 'string', 'max:1000'],
-            'products' => ['nullable', 'string', 'max:2000'],
-            'services' => ['nullable', 'string', 'max:2000'],
+            'operating_hours' => ['nullable'],
+            'products' => ['nullable'],
+            'services' => ['nullable'],
             'additional_info' => ['nullable', 'string', 'max:5000'],
         ];
     }

@@ -36,10 +36,18 @@ class BusinessController extends Controller
     {
         $validated = $request->validated();
 
-        // Convert operating hours / products / services if entered as text lines
-        $operatingHours = !empty($validated['operating_hours']) ? trim($validated['operating_hours']) : null;
-        $products = !empty($validated['products']) ? array_filter(array_map('trim', explode("\n", $validated['products']))) : null;
-        $services = !empty($validated['services']) ? array_filter(array_map('trim', explode("\n", $validated['services']))) : null;
+        // Convert operating hours / products / services if entered as text lines or arrays
+        $operatingHours = !empty($validated['operating_hours'])
+            ? (is_array($validated['operating_hours']) ? $validated['operating_hours'] : ['raw' => trim((string)$validated['operating_hours'])])
+            : null;
+
+        $products = !empty($validated['products'])
+            ? (is_array($validated['products']) ? array_values(array_filter($validated['products'])) : array_values(array_filter(array_map('trim', explode("\n", (string)$validated['products'])))))
+            : null;
+
+        $services = !empty($validated['services'])
+            ? (is_array($validated['services']) ? array_values(array_filter($validated['services'])) : array_values(array_filter(array_map('trim', explode("\n", (string)$validated['services'])))))
+            : null;
 
         $business = Business::create([
             'user_id' => Auth::id(),
@@ -104,9 +112,17 @@ class BusinessController extends Controller
 
         $validated = $request->validated();
 
-        $operatingHours = !empty($validated['operating_hours']) ? trim($validated['operating_hours']) : null;
-        $products = !empty($validated['products']) ? array_filter(array_map('trim', explode("\n", $validated['products']))) : null;
-        $services = !empty($validated['services']) ? array_filter(array_map('trim', explode("\n", $validated['services']))) : null;
+        $operatingHours = !empty($validated['operating_hours'])
+            ? (is_array($validated['operating_hours']) ? $validated['operating_hours'] : ['raw' => trim((string)$validated['operating_hours'])])
+            : null;
+
+        $products = !empty($validated['products'])
+            ? (is_array($validated['products']) ? array_values(array_filter($validated['products'])) : array_values(array_filter(array_map('trim', explode("\n", (string)$validated['products'])))))
+            : null;
+
+        $services = !empty($validated['services'])
+            ? (is_array($validated['services']) ? array_values(array_filter($validated['services'])) : array_values(array_filter(array_map('trim', explode("\n", (string)$validated['services'])))))
+            : null;
 
         $business->update([
             'name' => $validated['name'],
