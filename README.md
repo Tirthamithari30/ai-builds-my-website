@@ -6,9 +6,10 @@
 [![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://mysql.com)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.x-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 [![Google Gemini](https://img.shields.io/badge/Google_Gemini-2.5_Flash-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
-[![Tests Passing](https://img.shields.io/badge/Tests-138%20Passed%20(100%25)-success?style=for-the-badge)](tests)
+[![Tests Passing](https://img.shields.io/badge/Tests-177%20Passed%20(100%25)-success?style=for-the-badge)](tests)
 
 > **Developed for Websites.co.in Technical Internship Assignment**  
+> **Author:** Tirtha Yogesh Mithari ([@Tirthamithari30](https://github.com/Tirthamithari30))  
 > An enterprise-grade, end-to-end full-stack SaaS web application that autonomously converts raw business information, uploaded documents (PDF, DOCX, TXT), and public online sources into verified, customizable, and publishable business websites using **Google Gemini AI**.
 
 ---
@@ -502,9 +503,50 @@ ai-builds-my-website/
 ├── DECISIONS.md                 # Architectural Decision Records (ADRs)
 ├── DEMO_SCRIPT.md               # 5-minute timed video demonstration script
 ├── DEPLOYMENT.md                # Production infrastructure & operations manual
+├── PROJECT_DOCUMENTATION.md     # 20-section comprehensive project specification
 ├── README.md                    # Main project documentation
-└── SUBMISSION_EMAIL.md          # Technical internship assignment submission draft
+├── SUBMISSION_EMAIL.md          # Technical internship assignment submission draft
+└── docs/
+    ├── DEMO_SCRIPT_7MIN.md      # 7-minute timed presenter walkthrough screenplay
+    ├── INSTALLATION_GUIDE.md    # Clean-machine developer setup guide
+    └── USER_GUIDE.md            # Complete end-user operational manual
 ```
+
+---
+
+## Application Screenshots & Visual Walkthrough
+
+| Screen / Feature | Route / Endpoint | Description |
+|---|---|---|
+| **Landing Page** | `/` | High-converting landing page with hero banner, feature showcases, architecture diagrams, and CTA buttons. |
+| **Authentication** | `/login`, `/register` | Secure registration and login views with brute-force rate-limiting and password visibility toggles. |
+| **Owner Dashboard** | `/dashboard` | Central multi-business command center displaying metrics, project cards, and quick actions. |
+| **Document Ingestion** | `/businesses/{id}/sources` | Drag-and-drop file uploader (PDF, DOCX, TXT, CSV) and SSRF-protected web crawler interface. |
+| **Fact Verification** | `/businesses/{id}/facts` | Interactive conflict resolution and confirmation table enforcing the zero-hallucination Golden Rule. |
+| **Website Visual Editor** | `/websites/{id}/edit` | Live responsive preview canvas with Desktop, Tablet, and Mobile viewport toggles and section controls. |
+| **Section AI Regeneration** | `/websites/{id}/sections/{s}/regenerate` | Targeted AI section copywriting with side-by-side diff verification before applying changes. |
+| **Live Published Site 1** | `/sites/patil-traditional-spices` | Authentic Kolhapuri spice manufacturer website with responsive product cards, testimonials, and SEO tags. |
+| **Live Published Site 2** | `/sites/dr-kulkarni-ayurveda` | Classical Ayurvedic clinic website with therapy accordions, doctor credentials, and contact details. |
+
+*(For complete step-by-step screenshots and visual instructions, see [docs/USER_GUIDE.md](docs/USER_GUIDE.md)).*
+
+---
+
+## Future Enhancements
+
+1. **Custom Domain Mapping**: Provide automated CNAME and A-record routing allowing businesses to link custom apex domains (e.g., `www.mybusiness.com`).
+2. **Multi-Language Generation**: Generate bilingual websites (e.g., English and Marathi/Hindi) simultaneously from a single verified knowledge graph.
+3. **Direct WhatsApp Lead Integration**: Embed interactive WhatsApp click-to-chat widgets linked directly to verified business phone numbers.
+4. **Lightweight E-Commerce & Payments**: Integrate instant checkout for products and appointment booking with Razorpay / Stripe integration.
+
+---
+
+## Author Information
+
+- **Author:** Tirtha Yogesh Mithari
+- **GitHub Profile:** [@Tirthamithari30](https://github.com/Tirthamithari30)
+- **Role:** Full-Stack Laravel & AI Engineer
+- **Assignment:** Websites.co.in Technical Internship Assignment
 
 ---
 

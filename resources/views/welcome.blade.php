@@ -33,6 +33,10 @@
 
             <!-- Desktop Links -->
             <div class="hidden sm:flex items-center gap-4">
+                <a href="{{ route('sites.index') }}" class="text-sm font-semibold text-emerald-600 hover:text-emerald-700 transition-colors inline-flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span>Live Sites</span>
+                </a>
                 <a href="#architecture" class="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors">Architecture</a>
                 <a href="#services" class="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors">Services</a>
                 @auth
@@ -78,6 +82,10 @@
              id="welcome-mobile-drawer"
              style="display: none;">
             <nav class="space-y-1">
+                <a href="{{ route('sites.index') }}" @click="mobileNavOpen = false" class="block px-3 py-2 rounded-lg text-sm font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 flex items-center justify-between">
+                    <span>Live Demonstration Sites</span>
+                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                </a>
                 <a href="#architecture" @click="mobileNavOpen = false" class="block px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">
                     Architecture
                 </a>
@@ -163,6 +171,96 @@
                             <div class="text-xs font-medium text-slate-500 uppercase tracking-wider">AI Engine</div>
                             <div class="mt-1 text-lg font-bold text-slate-900">Google Gemini</div>
                             <div class="text-xs text-blue-600 font-semibold mt-0.5">● Prompt-Hardened</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Demonstration Websites Showcase Section -->
+        <section id="showcase" class="py-16 bg-slate-50 border-b border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+                    <div>
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800 border border-emerald-300">
+                            <span class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
+                            Live Demonstration Websites
+                        </span>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-3 tracking-tight">
+                            Explore Real Live Generated Websites
+                        </h2>
+                        <p class="text-slate-600 mt-2 text-sm max-w-2xl">
+                            These websites are live, public, and accessible to anyone without login. Built entirely with verified business data and zero AI hallucinations.
+                        </p>
+                    </div>
+                    <a href="{{ route('sites.index') }}" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white border border-slate-300 text-slate-800 hover:border-slate-400 font-semibold text-xs shadow-2xs hover:shadow-xs transition-all whitespace-nowrap self-start md:self-auto">
+                        <span>View All Live Sites Directory</span>
+                        <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Live Site 1: Patil Traditional Spices & Foods -->
+                    <div class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs hover:shadow-md hover:border-amber-300 transition-all flex flex-col justify-between group">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-4">
+                                <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-800 border border-amber-200">
+                                    Warm Artisan Preset • Retail
+                                </span>
+                                <span class="text-xs font-mono text-emerald-600 font-semibold flex items-center gap-1">
+                                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span> 200 OK
+                                </span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 group-hover:text-amber-800 transition-colors">
+                                Patil Traditional Spices & Foods
+                            </h3>
+                            <p class="text-xs text-slate-500 mt-0.5 font-medium">Shahupuri, Kolhapur, Maharashtra</p>
+                            <p class="text-sm text-slate-600 mt-3 leading-relaxed">
+                                Authentic handcrafted Kolhapuri spices, Kanda Lasun Masala, and traditional blends crafted with sun-dried Byadgi chillies since 1985.
+                            </p>
+                            <div class="mt-4 flex flex-wrap gap-2 text-xs text-slate-600 font-mono">
+                                <span class="bg-slate-100 px-2 py-0.5 rounded">📞 +91 94220 54321</span>
+                                <span class="bg-slate-100 px-2 py-0.5 rounded">📍 45 Shahupuri 2nd Lane</span>
+                            </div>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                            <span class="text-xs font-mono text-blue-600">/sites/patil-traditional-spices</span>
+                            <a href="{{ url('/sites/patil-traditional-spices') }}" target="_blank" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-amber-700 hover:bg-amber-800 shadow-xs transition-colors">
+                                <span>Open Live Website</span>
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Live Site 2: Dr. Kulkarni Ayurvedic Wellness Clinic -->
+                    <div class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs hover:shadow-md hover:border-emerald-300 transition-all flex flex-col justify-between group">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-4">
+                                <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                                    Corporate Clean • Healthcare
+                                </span>
+                                <span class="text-xs font-mono text-emerald-600 font-semibold flex items-center gap-1">
+                                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span> 200 OK
+                                </span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 group-hover:text-emerald-800 transition-colors">
+                                Dr. Kulkarni Ayurvedic Wellness Clinic
+                            </h3>
+                            <p class="text-xs text-slate-500 mt-0.5 font-medium">Kothrud, Pune, Maharashtra</p>
+                            <p class="text-sm text-slate-600 mt-3 leading-relaxed">
+                                Classical Ayurvedic consultation, Panchakarma detoxification, and Nadi Pariksha pulse diagnosis supervised by certified MD doctors.
+                            </p>
+                            <div class="mt-4 flex flex-wrap gap-2 text-xs text-slate-600 font-mono">
+                                <span class="bg-slate-100 px-2 py-0.5 rounded">📞 +91 98230 12345</span>
+                                <span class="bg-slate-100 px-2 py-0.5 rounded">📍 Mayur Colony, Kothrud</span>
+                            </div>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                            <span class="text-xs font-mono text-blue-600">/sites/dr-kulkarni-ayurveda</span>
+                            <a href="{{ url('/sites/dr-kulkarni-ayurveda') }}" target="_blank" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-emerald-700 hover:bg-emerald-800 shadow-xs transition-colors">
+                                <span>Open Live Website</span>
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            </a>
                         </div>
                     </div>
                 </div>

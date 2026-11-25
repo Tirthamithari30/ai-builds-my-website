@@ -98,6 +98,19 @@ class PhaseTwentyFinalReleaseVerificationTest extends TestCase
         $kulkarniResponse->assertStatus(200);
         $kulkarniResponse->assertSee('Dr. Kulkarni');
         $kulkarniResponse->assertSee('+91 98230 12345');
+
+        // Verify public sites showcase directory /sites
+        $sitesDirectory = $this->get('/sites');
+        $sitesDirectory->assertStatus(200);
+        $sitesDirectory->assertSee('Live Published Websites');
+        $sitesDirectory->assertSee('patil-traditional-spices');
+        $sitesDirectory->assertSee('dr-kulkarni-ayurveda');
+
+        // Verify homepage showcase section
+        $homeResponse = $this->get('/');
+        $homeResponse->assertStatus(200);
+        $homeResponse->assertSee('patil-traditional-spices');
+        $homeResponse->assertSee('dr-kulkarni-ayurveda');
     }
 
     public function test_project_documentation_covers_all_twenty_mandatory_technical_sections(): void

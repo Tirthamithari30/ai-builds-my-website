@@ -20,6 +20,21 @@ class WebsitePublishingController extends Controller
     ) {}
 
     /**
+     * Public directory of all live published websites.
+     */
+    public function indexPublic(): View
+    {
+        $publishedWebsites = Website::where('is_published', true)
+            ->with(['business', 'sections'])
+            ->latest('published_at')
+            ->get();
+
+        return view('sites.index', [
+            'websites' => $publishedWebsites,
+        ]);
+    }
+
+    /**
      * Public endpoint to render live published websites for anonymous visitors.
      * Unpublished drafts strictly return a 404 HTTP status.
      */

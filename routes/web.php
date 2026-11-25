@@ -17,7 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-// Public Published Websites (Phase 7)
+// Public Published Websites (Phase 7 & 20)
+Route::get('/sites', [WebsitePublishingController::class, 'indexPublic'])->name('sites.index');
 Route::get('/sites/{slug}', [WebsitePublishingController::class, 'showPublic'])->name('sites.show');
 
 // Guest Authentication Routes
