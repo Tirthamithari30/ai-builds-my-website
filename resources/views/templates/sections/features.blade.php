@@ -14,9 +14,13 @@
             <div class="h-1 w-16 bg-site-primary rounded-full mx-auto mt-4"></div>
         </div>
 
+        @php
+            $featureCards = $content['cards'] ?? $content['features'] ?? $content['items'] ?? [];
+        @endphp
+
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            @if (!empty($content['cards']) && is_array($content['cards']))
-                @foreach ($content['cards'] as $card)
+            @if (!empty($featureCards) && is_array($featureCards))
+                @foreach ($featureCards as $card)
                     <div class="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-xs hover:border-slate-300 transition-colors">
                         <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-white mb-6 shadow-xs" style="background-color: var(--color-primary);">
                             @if (($card['icon'] ?? '') === 'clock')
@@ -33,8 +37,8 @@
                                 </svg>
                             @endif
                         </div>
-                        <h3 class="text-lg font-bold text-slate-900 mb-2">{{ $card['title'] ?? 'Verified Feature' }}</h3>
-                        <p class="text-sm text-slate-600 leading-relaxed">{{ $card['desc'] ?? '' }}</p>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">{{ $card['title'] ?? $card['name'] ?? 'Verified Feature' }}</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">{{ $card['desc'] ?? $card['description'] ?? '' }}</p>
                     </div>
                 @endforeach
             @endif

@@ -14,9 +14,13 @@
             <div class="h-1 w-16 bg-site-primary rounded-full mx-auto mt-4"></div>
         </div>
 
-        @if (!empty($content['items']) && is_array($content['items']))
+        @php
+            $testimonialItems = $content['items'] ?? $content['reviews'] ?? $content['testimonials'] ?? [];
+        @endphp
+
+        @if (!empty($testimonialItems) && is_array($testimonialItems))
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                @foreach ($content['items'] as $item)
+                @foreach ($testimonialItems as $item)
                     <div class="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-xs flex flex-col justify-between hover:border-slate-300 transition-colors">
                         <div>
                             <!-- Star Rating -->
@@ -28,15 +32,15 @@
                                 @endfor
                             </div>
                             <blockquote class="text-sm text-slate-700 leading-relaxed italic">
-                                "{{ $item['quote'] ?? 'Authentic and dependable service.' }}"
+                                "{{ $item['quote'] ?? $item['comment'] ?? $item['text'] ?? 'Authentic and dependable service.' }}"
                             </blockquote>
                         </div>
 
                         <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
                             <div>
-                                <div class="text-xs font-bold text-slate-900">{{ $item['author'] ?? 'Verified Client' }}</div>
-                                @if (!empty($item['role']))
-                                    <div class="text-[11px] text-slate-500">{{ $item['role'] }}</div>
+                                <div class="text-xs font-bold text-slate-900">{{ $item['author'] ?? $item['name'] ?? 'Verified Client' }}</div>
+                                @if (!empty($item['role']) || !empty($item['city']))
+                                    <div class="text-[11px] text-slate-500">{{ $item['role'] ?? $item['city'] }}</div>
                                 @endif
                             </div>
                             <span class="text-[10px] font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
@@ -48,8 +52,7 @@
             </div>
         @else
             <div class="p-8 rounded-2xl bg-white border border-slate-200 text-center max-w-md mx-auto text-sm text-slate-500">
-                <p>No verified customer reviews have been added yet.</p>
-                <p class="text-xs text-slate-400 mt-1">Add client feedback through the website editor.</p>
+                No verified customer reviews have been added yet.
             </div>
         @endif
     </div>

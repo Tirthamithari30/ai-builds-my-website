@@ -15,7 +15,7 @@
             <!-- Left Info Cards -->
             <div class="lg:col-span-5 space-y-6">
                 <p class="text-base text-slate-600 leading-relaxed">
-                    Have questions about our {{ $business->category }} services or want to place an order? Contact us using the confirmed details below.
+                    Have questions about our {{ str_replace('_', ' ', $business->category) }} services or want to place an order? Contact us using the confirmed details below.
                 </p>
 
                 <div class="space-y-4">

@@ -97,7 +97,7 @@
                     {{ strtoupper(substr($business->name, 0, 1)) }}
                 </div>
                 <div>
-                    <span class="text-lg font-bold tracking-tight block leading-tight text-site-secondary">{{ $website->title }}</span>
+                    <span class="text-base sm:text-lg font-bold tracking-tight block leading-tight text-site-secondary line-clamp-1 max-w-[200px] sm:max-w-xs md:max-w-sm">{{ $website->title }}</span>
                     @if (!empty($website->settings['city']))
                         <span class="text-xs text-slate-500 block">{{ $website->settings['city'] }}</span>
                     @endif
@@ -125,7 +125,7 @@
                         <span>{{ $website->settings['phone'] }}</span>
                     </a>
                 @endif
-                <a href="#contact" class="btn-primary text-xs font-semibold px-4 py-2 rounded-xl shadow-xs">
+                <a href="#contact" class="btn-primary text-xs font-semibold px-4 py-2 rounded-xl shadow-xs whitespace-nowrap">
                     Contact Us
                 </a>
             </div>

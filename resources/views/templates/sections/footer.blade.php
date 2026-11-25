@@ -8,7 +8,7 @@
                 </div>
                 <div>
                     <span class="text-base font-bold text-white block">{{ $business->name }}</span>
-                    <span class="text-xs text-slate-400 block">{{ $content['tagline'] ?? "Excellence in {$business->category}" }}</span>
+                    <span class="text-xs text-slate-400 block">{{ $content['tagline'] ?? ("Excellence in " . ucwords(str_replace('_', ' ', $business->category))) }}</span>
                 </div>
             </div>
 
