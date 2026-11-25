@@ -49,6 +49,12 @@ class FactVerificationService
         $allFacts = ExtractedFact::where('business_id', $business->id)->get();
         $grouped = $allFacts->groupBy('fact_key');
 
+        // Batch load all fact confirmations for this business to eliminate N+1 queries
+        $allConfirmations = FactConfirmation::where('business_id', $business->id)
+            ->latest()
+            ->get()
+            ->groupBy('fact_key');
+
         $confirmed = [];
         $conflicts = [];
         $unverified = [];
@@ -61,10 +67,7 @@ class FactVerificationService
             $factsForKey = $grouped->get($key, collect());
 
             // 1. Check if user already confirmed or manually supplied this fact
-            $confirmation = FactConfirmation::where('business_id', $business->id)
-                ->where('fact_key', $key)
-                ->latest()
-                ->first();
+            $confirmation = $allConfirmations->get($key)?->first();
 
             $confirmedModel = $factsForKey->firstWhere('verification_status', 'user-confirmed');
 

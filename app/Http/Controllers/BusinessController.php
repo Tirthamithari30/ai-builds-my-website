@@ -6,7 +6,6 @@ use App\Http\Requests\StoreBusinessRequest;
 use App\Http\Requests\UpdateBusinessRequest;
 use App\Models\Business;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
@@ -60,7 +59,7 @@ class BusinessController extends Controller
             'phone' => $validated['phone'] ?? null,
             'email' => $validated['email'] ?? null,
             'description' => $validated['description'] ?? null,
-            'operating_hours' => $operatingHours ? ['raw' => $operatingHours] : null,
+            'operating_hours' => $operatingHours,
             'products' => $products,
             'services' => $services,
             'additional_info' => $validated['additional_info'] ?? null,
@@ -134,7 +133,7 @@ class BusinessController extends Controller
             'phone' => $validated['phone'] ?? null,
             'email' => $validated['email'] ?? null,
             'description' => $validated['description'] ?? null,
-            'operating_hours' => $operatingHours ? ['raw' => $operatingHours] : null,
+            'operating_hours' => $operatingHours,
             'products' => $products,
             'services' => $services,
             'additional_info' => $validated['additional_info'] ?? null,

@@ -52,8 +52,11 @@ class WebsitePublishingService
         }
 
         // 2. Visible sections check
-        $visibleCount = $website->sections()->where('is_visible', true)->count();
-        if ($visibleCount === 0) {
+        $visibleSections = $website->relationLoaded('sections')
+            ? $website->sections->where('is_visible', true)
+            : $website->sections()->where('is_visible', true)->get();
+
+        if ($visibleSections->isEmpty()) {
             $errors[] = 'Website must contain at least one visible section to publish.';
         }
 
@@ -64,7 +67,7 @@ class WebsitePublishingService
         }
 
         // 4. Section content validation
-        foreach ($website->sections()->where('is_visible', true)->get() as $sec) {
+        foreach ($visibleSections as $sec) {
             if (empty($sec->content) || !is_array($sec->content)) {
                 $errors[] = "Section '{$sec->section_type}' contains empty content.";
             }

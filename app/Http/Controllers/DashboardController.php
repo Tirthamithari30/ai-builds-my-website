@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Business;
 use App\Models\ExtractedFact;
 use App\Models\Website;
 use Illuminate\Http\Request;

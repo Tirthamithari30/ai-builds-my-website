@@ -52,7 +52,8 @@ The application autonomously transforms raw business details, uploaded documents
    - Multi-layer security: authentication rate limiting (5 attempts/min), CSS injection sanitization, IDOR prevention across all models, and 100% parameterized queries.
    - Production readiness: automated daily MySQL backup script (`scripts/backup-db.sh`), disaster recovery script (`scripts/restore-db.sh`), zero-downtime deployment script (`scripts/deploy.sh`), and comprehensive deployment documentation (`DEPLOYMENT.md`).
    - Live accessibility verified: all core pages (Landing, Login, Register, Dashboard, Setup, Preview, and Public Site) load cleanly over HTTP with zero errors.
-   - **146 automated tests** with **834 assertions**, all passing (100% green).
+   - **153 automated tests** with **872 assertions**, all passing (100% green).
+   - Architectural excellence: batched queries to prevent N+1 overhead, clean model factories, dedicated service boundaries, and fully decoupled domain layer.
    - Polished UI/UX: mobile navigation drawer, password visibility toggles, auto-dismissing flash notifications, real-time generation spinners, and responsive split-view website editor.
 
 ---
