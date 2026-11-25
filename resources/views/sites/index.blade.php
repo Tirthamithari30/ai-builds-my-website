@@ -84,9 +84,9 @@
                     @foreach ($websites as $site)
                         @php
                             $biz = $site->business;
-                            $publicUrl = url('/sites/' . $site->slug);
+                            $publicUrl = '/sites/' . $site->slug;
                         @endphp
-                        <div class="bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-xs hover:shadow-md hover:border-slate-300 transition-all flex flex-col justify-between group">
+                        <a href="{{ $publicUrl }}" class="block bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-xs hover:shadow-lg hover:border-blue-400 transition-all flex flex-col justify-between group cursor-pointer text-left no-underline">
                             <!-- Card Header -->
                             <div class="p-6 sm:p-8">
                                 <div class="flex items-center justify-between gap-4 mb-4">
@@ -100,9 +100,7 @@
                                 </div>
 
                                 <h2 class="text-xl sm:text-2xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
-                                    <a href="{{ $publicUrl }}">
-                                        {{ $site->title }}
-                                    </a>
+                                    {{ $site->title }}
                                 </h2>
 
                                 @if (!empty($site->settings['tagline']))
@@ -140,13 +138,12 @@
                             <!-- Card Footer Action -->
                             <div class="px-6 sm:px-8 py-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
                                 <span class="text-xs text-slate-500">Design Preset: <strong class="text-slate-700 capitalize">{{ str_replace('_', ' ', $site->design_preset) }}</strong></span>
-                                <a href="{{ $publicUrl }}"
-                                   class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-xs transition-colors">
+                                <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-blue-600 group-hover:bg-blue-700 shadow-xs transition-colors">
                                     <span>Visit Live Website</span>
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-                                </a>
+                                    <svg class="w-3.5 h-3.5 transform group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                                </span>
                             </div>
-                        </div>
+                        </a>
                     @endforeach
                 </div>
             @endif

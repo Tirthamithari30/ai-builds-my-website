@@ -201,17 +201,17 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <!-- Live Site 1: Patil Traditional Spices & Foods -->
-                    <div class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs hover:shadow-md hover:border-amber-300 transition-all flex flex-col justify-between group">
+                    <a href="/sites/patil-traditional-spices" class="block bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs hover:shadow-lg hover:border-amber-400 transition-all flex flex-col justify-between group cursor-pointer text-left no-underline">
                         <div>
                             <div class="flex items-center justify-between gap-2 mb-4">
                                 <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-800 border border-amber-200">
                                     Warm Artisan Preset • Retail
                                 </span>
                                 <span class="text-xs font-mono text-emerald-600 font-semibold flex items-center gap-1">
-                                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span> 200 OK
+                                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> 200 OK
                                 </span>
                             </div>
-                            <h3 class="text-xl font-bold text-slate-900 group-hover:text-amber-800 transition-colors">
+                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900 group-hover:text-amber-700 transition-colors">
                                 Patil Traditional Spices & Foods
                             </h3>
                             <p class="text-xs text-slate-500 mt-0.5 font-medium">Shahupuri, Kolhapur, Maharashtra</p>
@@ -224,26 +224,26 @@
                             </div>
                         </div>
                         <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
-                            <span class="text-xs font-mono text-blue-600">/sites/patil-traditional-spices</span>
-                            <a href="{{ url('/sites/patil-traditional-spices') }}" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-amber-700 hover:bg-amber-800 shadow-xs transition-colors">
+                            <span class="text-xs font-mono text-blue-600 font-semibold">/sites/patil-traditional-spices</span>
+                            <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-amber-700 group-hover:bg-amber-800 shadow-xs transition-colors">
                                 <span>Open Live Website</span>
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-                            </a>
+                                <svg class="w-3.5 h-3.5 transform group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            </span>
                         </div>
-                    </div>
+                    </a>
 
                     <!-- Live Site 2: Dr. Kulkarni Ayurvedic Wellness Clinic -->
-                    <div class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs hover:shadow-md hover:border-emerald-300 transition-all flex flex-col justify-between group">
+                    <a href="/sites/dr-kulkarni-ayurveda" class="block bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs hover:shadow-lg hover:border-emerald-400 transition-all flex flex-col justify-between group cursor-pointer text-left no-underline">
                         <div>
                             <div class="flex items-center justify-between gap-2 mb-4">
                                 <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
                                     Corporate Clean • Healthcare
                                 </span>
                                 <span class="text-xs font-mono text-emerald-600 font-semibold flex items-center gap-1">
-                                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span> 200 OK
+                                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> 200 OK
                                 </span>
                             </div>
-                            <h3 class="text-xl font-bold text-slate-900 group-hover:text-emerald-800 transition-colors">
+                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900 group-hover:text-emerald-700 transition-colors">
                                 Dr. Kulkarni Ayurvedic Wellness Clinic
                             </h3>
                             <p class="text-xs text-slate-500 mt-0.5 font-medium">Kothrud, Pune, Maharashtra</p>
@@ -256,13 +256,13 @@
                             </div>
                         </div>
                         <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
-                            <span class="text-xs font-mono text-blue-600">/sites/dr-kulkarni-ayurveda</span>
-                            <a href="{{ url('/sites/dr-kulkarni-ayurveda') }}" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-emerald-700 hover:bg-emerald-800 shadow-xs transition-colors">
+                            <span class="text-xs font-mono text-blue-600 font-semibold">/sites/dr-kulkarni-ayurveda</span>
+                            <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-emerald-700 group-hover:bg-emerald-800 shadow-xs transition-colors">
                                 <span>Open Live Website</span>
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-                            </a>
+                                <svg class="w-3.5 h-3.5 transform group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            </span>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </section>
