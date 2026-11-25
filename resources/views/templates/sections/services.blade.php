@@ -17,22 +17,33 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @if (!empty($content['items']) && is_array($content['items']))
                 @foreach ($content['items'] as $item)
-                    <div class="bg-white p-7 rounded-2xl border border-slate-200/80 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group">
-                        <div>
-                            <div class="w-10 h-10 rounded-xl flex items-center justify-center text-white mb-5 shadow-2xs group-hover:scale-105 transition-transform" style="background-color: var(--color-primary);">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                                </svg>
-                            </div>
-                            <h3 class="text-lg font-bold text-slate-900 mb-2">{{ $item['title'] ?? $item['name'] ?? 'Specialized Service' }}</h3>
-                            <p class="text-sm text-slate-600 leading-relaxed">{{ $item['description'] ?? 'Tailored service designed for exceptional results.' }}</p>
-                        </div>
-                        @if (!empty($item['price']))
-                            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
-                                <span class="text-slate-500">Pricing</span>
-                                <span class="font-bold text-slate-900">{{ $item['price'] }}</span>
+                    <div class="bg-white rounded-2xl border border-slate-200/80 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group overflow-hidden">
+                        @if (!empty($item['image']))
+                            <div class="aspect-16/10 overflow-hidden bg-slate-100">
+                                <img src="{{ $item['image'] }}"
+                                     alt="{{ $item['title'] ?? $item['name'] ?? 'Service' }}"
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                             </div>
                         @endif
+                        <div class="p-7">
+                            <div>
+                                @if (empty($item['image']))
+                                    <div class="w-10 h-10 rounded-xl flex items-center justify-center text-white mb-5 shadow-2xs group-hover:scale-105 transition-transform" style="background-color: var(--color-primary);">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                        </svg>
+                                    </div>
+                                @endif
+                                <h3 class="text-lg font-bold text-slate-900 mb-2">{{ $item['title'] ?? $item['name'] ?? 'Specialized Service' }}</h3>
+                                <p class="text-sm text-slate-600 leading-relaxed">{{ $item['description'] ?? 'Tailored service designed for exceptional results.' }}</p>
+                            </div>
+                            @if (!empty($item['price']))
+                                <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
+                                    <span class="text-slate-500">Pricing</span>
+                                    <span class="font-bold text-slate-900">{{ $item['price'] }}</span>
+                                </div>
+                            @endif
+                        </div>
                     </div>
                 @endforeach
             @endif

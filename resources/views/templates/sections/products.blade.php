@@ -17,7 +17,14 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @if (!empty($content['items']) && is_array($content['items']))
                 @foreach ($content['items'] as $prod)
-                    <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col justify-between hover:shadow-md transition-shadow">
+                    <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col justify-between hover:shadow-md transition-shadow group">
+                        @if (!empty($prod['image']))
+                            <div class="aspect-16/10 overflow-hidden bg-slate-100">
+                                <img src="{{ $prod['image'] }}"
+                                     alt="{{ $prod['title'] ?? $prod['name'] ?? 'Product' }}"
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            </div>
+                        @endif
                         <div class="p-6">
                             <div class="flex items-center justify-between mb-3">
                                 <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider bg-slate-100 text-slate-700">Product</span>

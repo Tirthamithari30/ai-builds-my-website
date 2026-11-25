@@ -52,9 +52,17 @@
             </div>
 
             <div class="lg:col-span-5">
+                @php
+                    $categoryFallback = match(strtolower($business->category ?? '')) {
+                        'restaurant', 'cafe', 'food', 'retail' => 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=1200&q=80',
+                        'salon', 'spa', 'wellness', 'fitness', 'healthcare', 'professional_services' => 'https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=1200&q=80',
+                        default => 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80',
+                    };
+                    $heroImageUrl = !empty($content['hero_image']) ? $content['hero_image'] : $categoryFallback;
+                @endphp
                 <div class="relative mx-auto max-w-md lg:max-w-none">
                     <div class="aspect-4/3 rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-slate-100">
-                        <img src="{{ $content['hero_image'] ?? 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80' }}"
+                        <img src="{{ $heroImageUrl }}"
                              alt="{{ $business->name }}"
                              class="w-full h-full object-cover">
                     </div>

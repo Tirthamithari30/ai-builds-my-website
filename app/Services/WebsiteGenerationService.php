@@ -641,10 +641,23 @@ PROMPT;
         $address = $verifiedFacts['address'] ?? $business->address ?? ($city ? "Main Street, {$city}" : '');
         $desc = $verifiedFacts['description'] ?? $business->description ?? "Delivering exceptional {$business->category} solutions with verified standards and customer satisfaction.";
 
+        // Category-aware default hero images
+        $categoryHeroMap = [
+            'restaurant' => 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80',
+            'cafe' => 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80',
+            'food' => 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=1200&q=80',
+            'retail' => 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=1200&q=80',
+            'healthcare' => 'https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=1200&q=80',
+            'professional_services' => 'https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=1200&q=80',
+            'salon' => 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1200&q=80',
+            'fitness' => 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1200&q=80',
+            'consultant' => 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80',
+        ];
+
         // Default or uploaded hero image
         $defaultHeroImage = !empty($images)
             ? $images[0]['url']
-            : 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80';
+            : ($categoryHeroMap[strtolower($business->category ?? '')] ?? 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80');
 
         switch ($type) {
             case 'hero':
