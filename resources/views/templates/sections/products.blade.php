@@ -25,7 +25,7 @@
                                     <span class="font-extrabold text-site-primary text-sm">{{ $prod['price'] }}</span>
                                 @endif
                             </div>
-                            <h3 class="text-lg font-bold text-slate-900 mb-2">{{ $prod['title'] ?? 'Product Offering' }}</h3>
+                            <h3 class="text-lg font-bold text-slate-900 mb-2">{{ $prod['title'] ?? $prod['name'] ?? 'Product Offering' }}</h3>
                             <p class="text-sm text-slate-600 leading-relaxed">{{ $prod['description'] ?? 'Authentic quality product crafted with precision.' }}</p>
                         </div>
                         <div class="p-6 pt-0">

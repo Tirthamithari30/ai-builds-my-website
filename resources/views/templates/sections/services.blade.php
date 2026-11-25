@@ -24,7 +24,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                                 </svg>
                             </div>
-                            <h3 class="text-lg font-bold text-slate-900 mb-2">{{ $item['title'] ?? 'Specialized Service' }}</h3>
+                            <h3 class="text-lg font-bold text-slate-900 mb-2">{{ $item['title'] ?? $item['name'] ?? 'Specialized Service' }}</h3>
                             <p class="text-sm text-slate-600 leading-relaxed">{{ $item['description'] ?? 'Tailored service designed for exceptional results.' }}</p>
                         </div>
                         @if (!empty($item['price']))
