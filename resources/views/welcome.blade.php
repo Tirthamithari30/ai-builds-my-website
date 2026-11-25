@@ -32,13 +32,13 @@
             </div>
 
             <!-- Desktop Links -->
-            <div class="hidden sm:flex items-center gap-4">
-                <a href="{{ route('sites.index') }}" class="text-sm font-semibold text-emerald-600 hover:text-emerald-700 transition-colors inline-flex items-center gap-1.5">
+            <div class="hidden sm:flex items-center gap-5">
+                <a href="#showcase" class="text-sm font-semibold text-emerald-600 hover:text-emerald-700 transition-colors inline-flex items-center gap-1.5">
                     <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                     <span>Live Sites</span>
                 </a>
+                <a href="#verification" class="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors">How It Works</a>
                 <a href="#architecture" class="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors">Architecture</a>
-                <a href="#services" class="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors">Services</a>
                 @auth
                     <a href="{{ route('dashboard') }}" class="inline-flex items-center px-4 py-2 rounded-xl text-xs font-semibold bg-blue-600 text-white hover:bg-blue-700 shadow-xs transition-colors">
                         Go to Dashboard
@@ -82,15 +82,15 @@
              id="welcome-mobile-drawer"
              style="display: none;">
             <nav class="space-y-1">
-                <a href="{{ route('sites.index') }}" @click="mobileNavOpen = false" class="block px-3 py-2 rounded-lg text-sm font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 flex items-center justify-between">
+                <a href="#showcase" @click="mobileNavOpen = false" class="block px-3 py-2 rounded-lg text-sm font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 flex items-center justify-between">
                     <span>Live Demonstration Sites</span>
                     <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
                 </a>
+                <a href="#verification" @click="mobileNavOpen = false" class="block px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">
+                    How It Works
+                </a>
                 <a href="#architecture" @click="mobileNavOpen = false" class="block px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">
                     Architecture
-                </a>
-                <a href="#services" @click="mobileNavOpen = false" class="block px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">
-                    Services
                 </a>
             </nav>
             <div class="pt-2 border-t border-slate-100 flex flex-col gap-2">
@@ -178,7 +178,7 @@
         </section>
 
         <!-- Live Demonstration Websites Showcase Section -->
-        <section id="showcase" class="py-16 bg-slate-50 border-b border-slate-200">
+        <section id="showcase" class="py-16 bg-slate-50 border-b border-slate-200 scroll-mt-16">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
                     <div>
@@ -368,7 +368,7 @@
         </section>
 
         <!-- Interactive Alpine.js Demonstration Component -->
-        <section id="verification" class="py-16 bg-slate-50 border-b border-slate-200" x-data="{ activeTab: 'conflict' }">
+        <section id="verification" class="py-16 bg-slate-50 border-b border-slate-200 scroll-mt-16" x-data="{ activeTab: 'conflict' }">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="max-w-3xl">
                     <span class="text-xs font-bold uppercase tracking-wider text-blue-600">Principle Demonstration</span>
