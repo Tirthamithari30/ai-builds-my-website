@@ -187,7 +187,7 @@
                 </button>
 
                 @if ($website->is_published)
-                    <a href="{{ url('/sites/' . $website->slug) }}" target="_blank"
+                    <a href="{{ url('/sites/' . $website->slug) }}"
                        class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-emerald-600/30 text-emerald-300 border border-emerald-500/50 hover:bg-emerald-600/40 transition-colors shadow-xs flex items-center gap-1.5"
                        title="Open Live Public Website">
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
@@ -658,7 +658,7 @@
                             <div class="space-y-1">
                                 <span class="text-[11px] text-slate-400">Live Public URL:</span>
                                 <div class="p-2 rounded-lg bg-slate-950 border border-slate-800 flex items-center justify-between gap-2">
-                                    <a href="{{ url('/sites/' . $website->slug) }}" target="_blank"
+                                    <a href="{{ url('/sites/' . $website->slug) }}"
                                        class="font-mono text-emerald-400 hover:text-emerald-300 truncate text-[11px] hover:underline">
                                         {{ url('/sites/' . $website->slug) }}
                                     </a>

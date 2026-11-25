@@ -225,7 +225,7 @@
                         </div>
                         <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
                             <span class="text-xs font-mono text-blue-600">/sites/patil-traditional-spices</span>
-                            <a href="{{ url('/sites/patil-traditional-spices') }}" target="_blank" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-amber-700 hover:bg-amber-800 shadow-xs transition-colors">
+                            <a href="{{ url('/sites/patil-traditional-spices') }}" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-amber-700 hover:bg-amber-800 shadow-xs transition-colors">
                                 <span>Open Live Website</span>
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                             </a>
@@ -257,7 +257,7 @@
                         </div>
                         <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
                             <span class="text-xs font-mono text-blue-600">/sites/dr-kulkarni-ayurveda</span>
-                            <a href="{{ url('/sites/dr-kulkarni-ayurveda') }}" target="_blank" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-emerald-700 hover:bg-emerald-800 shadow-xs transition-colors">
+                            <a href="{{ url('/sites/dr-kulkarni-ayurveda') }}" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-emerald-700 hover:bg-emerald-800 shadow-xs transition-colors">
                                 <span>Open Live Website</span>
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                             </a>

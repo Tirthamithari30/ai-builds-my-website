@@ -100,7 +100,7 @@
                                 </div>
 
                                 <h2 class="text-xl sm:text-2xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
-                                    <a href="{{ $publicUrl }}" target="_blank">
+                                    <a href="{{ $publicUrl }}">
                                         {{ $site->title }}
                                     </a>
                                 </h2>
@@ -141,7 +141,6 @@
                             <div class="px-6 sm:px-8 py-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
                                 <span class="text-xs text-slate-500">Design Preset: <strong class="text-slate-700 capitalize">{{ str_replace('_', ' ', $site->design_preset) }}</strong></span>
                                 <a href="{{ $publicUrl }}"
-                                   target="_blank"
                                    class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-xs transition-colors">
                                     <span>Visit Live Website</span>
                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
