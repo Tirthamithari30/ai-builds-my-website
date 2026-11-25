@@ -18,46 +18,59 @@
         </span>
     </div>
 
-    <!-- Main Navigation -->
-    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200/80 shadow-xs" x-data="{ mobileNavOpen: false }">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-white shadow-sm font-bold text-lg tracking-tight">
+    <!-- Main Navigation Header -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-xs" x-data="{ mobileNavOpen: false }">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between gap-4">
+            <!-- Brand Logo -->
+            <a href="{{ route('home') }}" class="flex items-center gap-3 flex-shrink-0 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-white shadow-sm font-extrabold text-lg tracking-tight group-hover:scale-105 transition-transform">
                     AI
                 </div>
                 <div>
-                    <span class="text-lg font-bold text-slate-900 tracking-tight">AI Builds My Website</span>
-                    <span class="hidden sm:inline-block text-xs text-slate-500 ml-2 font-medium">| Your Business. Your Information. Your Website.</span>
+                    <span class="text-base sm:text-lg font-bold text-slate-900 tracking-tight block leading-tight">AI Builds My Website</span>
+                    <span class="hidden xl:inline-block text-[11px] text-slate-500 font-medium">Your Business. Your Information. Your Website.</span>
                 </div>
-            </div>
+            </a>
 
-            <!-- Desktop Links -->
-            <div class="hidden sm:flex items-center gap-5">
-                <a href="#showcase" class="text-sm font-semibold text-emerald-600 hover:text-emerald-700 transition-colors inline-flex items-center gap-1.5">
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden md:flex items-center gap-1 lg:gap-2">
+                <a href="#showcase" class="px-3.5 py-2 rounded-xl text-sm font-semibold text-emerald-700 hover:text-emerald-900 hover:bg-emerald-50/80 transition-all inline-flex items-center gap-2">
                     <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span>Live Sites</span>
+                    <span>Live Websites</span>
+                    <span class="px-1.5 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-100 text-emerald-800">2 Live</span>
                 </a>
-                <a href="#verification" class="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors">How It Works</a>
-                <a href="#architecture" class="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors">Architecture</a>
+                <a href="#verification" class="px-3.5 py-2 rounded-xl text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 transition-all">
+                    How It Works
+                </a>
+                <a href="#architecture" class="px-3.5 py-2 rounded-xl text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 transition-all">
+                    Architecture & Services
+                </a>
+            </nav>
+
+            <!-- Action & Auth Buttons (Desktop) -->
+            <div class="hidden md:flex items-center gap-3">
+                <div class="h-5 w-px bg-slate-200"></div>
                 @auth
-                    <a href="{{ route('dashboard') }}" class="inline-flex items-center px-4 py-2 rounded-xl text-xs font-semibold bg-blue-600 text-white hover:bg-blue-700 shadow-xs transition-colors">
-                        Go to Dashboard
+                    <a href="{{ route('dashboard') }}" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 shadow-sm transition-all hover:shadow">
+                        <span>Dashboard</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                     </a>
                 @else
-                    <a href="{{ route('login') }}" class="text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors">
+                    <a href="{{ route('login') }}" class="px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:text-blue-600 hover:bg-slate-100/70 transition-colors">
                         Sign In
                     </a>
-                    <a href="{{ route('register') }}" class="inline-flex items-center px-4 py-2 rounded-xl text-xs font-semibold bg-blue-600 text-white hover:bg-blue-700 shadow-xs transition-colors">
-                        Get Started
+                    <a href="{{ route('register') }}" class="inline-flex items-center gap-1.5 px-4.5 py-2 rounded-xl text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 shadow-sm shadow-blue-500/20 hover:shadow transition-all">
+                        <span>Get Started</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                     </a>
                 @endauth
             </div>
 
             <!-- Mobile Hamburger Toggle -->
-            <div class="sm:hidden flex items-center">
+            <div class="md:hidden flex items-center">
                 <button type="button"
                         @click="mobileNavOpen = !mobileNavOpen"
-                        class="p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors focus:outline-hidden"
+                        class="p-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors focus:outline-hidden"
                         aria-label="Toggle mobile menu"
                         data-testid="welcome-mobile-toggle">
                     <svg x-show="!mobileNavOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -78,33 +91,38 @@
              x-transition:leave="transition ease-in duration-150"
              x-transition:leave-start="opacity-100 translate-y-0"
              x-transition:leave-end="opacity-0 -translate-y-2"
-             class="sm:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-5 space-y-3 shadow-lg"
+             class="md:hidden border-t border-slate-200 bg-white/98 backdrop-blur-md px-4 pt-3 pb-5 space-y-3 shadow-xl"
              id="welcome-mobile-drawer"
              style="display: none;">
-            <nav class="space-y-1">
-                <a href="#showcase" @click="mobileNavOpen = false" class="block px-3 py-2 rounded-lg text-sm font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 flex items-center justify-between">
-                    <span>Live Demonstration Sites</span>
-                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <nav class="space-y-1.5">
+                <a href="#showcase" @click="mobileNavOpen = false" class="block px-3.5 py-2.5 rounded-xl text-sm font-semibold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 flex items-center justify-between transition-colors border border-emerald-200/60">
+                    <span class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span>Live Demonstration Websites</span>
+                    </span>
+                    <span class="text-xs font-mono font-bold uppercase bg-emerald-100 px-2 py-0.5 rounded">2 Active</span>
                 </a>
-                <a href="#verification" @click="mobileNavOpen = false" class="block px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">
-                    How It Works
+                <a href="#verification" @click="mobileNavOpen = false" class="block px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50 transition-colors">
+                    How Conflict Resolution Works
                 </a>
-                <a href="#architecture" @click="mobileNavOpen = false" class="block px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">
-                    Architecture
+                <a href="#architecture" @click="mobileNavOpen = false" class="block px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50 transition-colors">
+                    Architecture & Services
                 </a>
             </nav>
-            <div class="pt-2 border-t border-slate-100 flex flex-col gap-2">
+            <div class="pt-3 border-t border-slate-100 flex flex-col gap-2">
                 @auth
-                    <a href="{{ route('dashboard') }}" class="w-full text-center py-2.5 px-4 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-xs">
+                    <a href="{{ route('dashboard') }}" class="w-full text-center py-2.5 px-4 rounded-xl text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 shadow-sm transition-colors">
                         Go to Dashboard
                     </a>
                 @else
-                    <a href="{{ route('login') }}" class="w-full text-center py-2 px-4 rounded-xl text-xs font-semibold border border-slate-300 text-slate-700 hover:bg-slate-50">
-                        Sign In
-                    </a>
-                    <a href="{{ route('register') }}" class="w-full text-center py-2.5 px-4 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-xs">
-                        Get Started Free
-                    </a>
+                    <div class="grid grid-cols-2 gap-2">
+                        <a href="{{ route('login') }}" class="w-full text-center py-2.5 px-4 rounded-xl text-sm font-semibold border border-slate-300 text-slate-700 hover:bg-slate-50 transition-colors">
+                            Sign In
+                        </a>
+                        <a href="{{ route('register') }}" class="w-full text-center py-2.5 px-4 rounded-xl text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 shadow-sm transition-colors">
+                            Get Started
+                        </a>
+                    </div>
                 @endauth
             </div>
         </div>
@@ -267,15 +285,20 @@
             </div>
         </section>
 
-        <!-- Service Architecture Section -->
+        <!-- System Architecture & Services Section -->
         <section id="architecture" class="py-16 bg-white border-b border-slate-200 scroll-mt-16 relative">
             <span id="services" class="absolute -top-16"></span>
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="max-w-2xl">
-                    <span class="text-xs font-bold uppercase tracking-wider text-blue-600">Modular MVC Architecture</span>
-                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-2">Dedicated Domain Service Layer</h2>
-                    <p class="text-slate-600 mt-2 text-sm">
-                        All business logic is isolated into dedicated service classes instead of bloated controllers, guaranteeing security, testability, and deterministic data flow.
+                <div class="max-w-3xl">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-blue-50 text-blue-700 border border-blue-200/80 mb-3">
+                        <svg class="w-3.5 h-3.5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                        <span>System Architecture & Services</span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                        7 Dedicated Domain Backend Services
+                    </h2>
+                    <p class="text-slate-600 mt-2 text-sm leading-relaxed">
+                        The core engine of this platform is structured into 7 modular domain services rather than bloated controllers. Each service has a single dedicated purpose: deterministic data extraction, strict verification, preset styling, and public deployment.
                     </p>
                 </div>
 
@@ -368,12 +391,16 @@
         </section>
 
         <!-- Interactive Alpine.js Demonstration Component -->
-        <section id="verification" class="py-16 bg-slate-50 border-b border-slate-200 scroll-mt-16" x-data="{ activeTab: 'conflict' }">
+        <section id="verification" class="py-16 bg-slate-50 border-b border-slate-200 scroll-mt-16 relative" x-data="{ activeTab: 'conflict' }">
+            <span id="how-it-works" class="absolute -top-16"></span>
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="max-w-3xl">
-                    <span class="text-xs font-bold uppercase tracking-wider text-blue-600">Principle Demonstration</span>
-                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-2">How Conflict Resolution Works</h2>
-                    <p class="text-slate-600 mt-2 text-sm">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-blue-50 text-blue-700 border border-blue-200/80 mb-3">
+                        <svg class="w-3.5 h-3.5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <span>Interactive Demonstration</span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">How Conflict Resolution Works</h2>
+                    <p class="text-slate-600 mt-2 text-sm leading-relaxed">
                         When multiple sources report different information, the application never guesses or hallucinates. It presents the conflict directly to the user for definitive confirmation.
                     </p>
                 </div>
