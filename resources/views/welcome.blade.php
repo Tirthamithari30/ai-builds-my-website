@@ -20,48 +20,45 @@
 
     <!-- Main Navigation Header -->
     <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-xs" x-data="{ mobileNavOpen: false }">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between gap-4">
-            <!-- Brand Logo -->
-            <a href="{{ route('home') }}" class="flex items-center gap-3 flex-shrink-0 group">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-white shadow-sm font-extrabold text-lg tracking-tight group-hover:scale-105 transition-transform">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+            <!-- Brand Logo (Single Line) -->
+            <a href="{{ route('home') }}" class="flex items-center gap-2.5 flex-shrink-0 group whitespace-nowrap">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-white shadow-sm font-extrabold text-base tracking-tight group-hover:scale-105 transition-transform">
                     AI
                 </div>
-                <div>
-                    <span class="text-base sm:text-lg font-bold text-slate-900 tracking-tight block leading-tight">AI Builds My Website</span>
-                    <span class="hidden xl:inline-block text-[11px] text-slate-500 font-medium">Your Business. Your Information. Your Website.</span>
+                <div class="flex items-center gap-2">
+                    <span class="text-base sm:text-lg font-bold text-slate-900 tracking-tight">AI Builds My Website</span>
+                    <span class="hidden xl:inline-block text-xs text-slate-500 font-medium">| Your Business. Your Information. Your Website.</span>
                 </div>
             </a>
 
-            <!-- Desktop Navigation Links -->
-            <nav class="hidden md:flex items-center gap-1 lg:gap-2">
-                <a href="#showcase" class="px-3.5 py-2 rounded-xl text-sm font-semibold text-emerald-700 hover:text-emerald-900 hover:bg-emerald-50/80 transition-all inline-flex items-center gap-2">
+            <!-- Desktop Navigation & Actions (All In One Clean Line) -->
+            <div class="hidden md:flex items-center gap-5 lg:gap-6 whitespace-nowrap">
+                <a href="#showcase" class="text-sm font-semibold text-emerald-700 hover:text-emerald-900 transition-colors inline-flex items-center gap-1.5">
                     <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span>Live Websites</span>
-                    <span class="px-1.5 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-100 text-emerald-800">2 Live</span>
+                    <span>Live Sites</span>
                 </a>
-                <a href="#verification" class="px-3.5 py-2 rounded-xl text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 transition-all">
+                <a href="#verification" class="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">
                     How It Works
                 </a>
-                <a href="#architecture" class="px-3.5 py-2 rounded-xl text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 transition-all">
-                    Architecture & Services
+                <a href="#architecture" class="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">
+                    Architecture
                 </a>
-            </nav>
 
-            <!-- Action & Auth Buttons (Desktop) -->
-            <div class="hidden md:flex items-center gap-3">
-                <div class="h-5 w-px bg-slate-200"></div>
+                <div class="h-4 w-px bg-slate-200"></div>
+
                 @auth
-                    <a href="{{ route('dashboard') }}" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 shadow-sm transition-all hover:shadow">
+                    <a href="{{ route('dashboard') }}" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 shadow-xs transition-colors">
                         <span>Dashboard</span>
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                     </a>
                 @else
-                    <a href="{{ route('login') }}" class="px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:text-blue-600 hover:bg-slate-100/70 transition-colors">
+                    <a href="{{ route('login') }}" class="text-sm font-medium text-slate-700 hover:text-blue-600 transition-colors">
                         Sign In
                     </a>
-                    <a href="{{ route('register') }}" class="inline-flex items-center gap-1.5 px-4.5 py-2 rounded-xl text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 shadow-sm shadow-blue-500/20 hover:shadow transition-all">
+                    <a href="{{ route('register') }}" class="inline-flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 shadow-xs hover:shadow-sm transition-all">
                         <span>Get Started</span>
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                     </a>
                 @endauth
             </div>
@@ -106,7 +103,7 @@
                     How Conflict Resolution Works
                 </a>
                 <a href="#architecture" @click="mobileNavOpen = false" class="block px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50 transition-colors">
-                    Architecture & Services
+                    Architecture
                 </a>
             </nav>
             <div class="pt-3 border-t border-slate-100 flex flex-col gap-2">
