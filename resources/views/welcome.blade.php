@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AI Builds My Website | Your Business. Your Information. Your Website.</title>
+    <meta name="project-release" content="Phase 1 - Phase 20 Final Release">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -468,9 +469,9 @@
                 © {{ date('Y') }} <strong>AI Builds My Website</strong>. Technical Internship Project for Websites.co.in.
             </div>
             <div class="flex items-center gap-6 text-sm text-slate-500 font-medium">
-                <span>Phase 1: Environment & Architecture</span>
-                <span class="text-slate-300">•</span>
-                <span class="text-emerald-600 font-semibold">Ready for Phase 2</span>
+                <a href="#showcase" class="hover:text-slate-900 transition-colors">Live Sites</a>
+                <a href="#verification" class="hover:text-slate-900 transition-colors">How It Works</a>
+                <a href="#architecture" class="hover:text-slate-900 transition-colors">Architecture</a>
             </div>
         </div>
     </footer>
