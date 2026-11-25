@@ -52,7 +52,7 @@ The application autonomously transforms raw business details, uploaded documents
    - Multi-layer security: authentication rate limiting (5 attempts/min), CSS injection sanitization, IDOR prevention across all models, and 100% parameterized queries.
    - Production readiness: automated daily MySQL backup script (`scripts/backup-db.sh`), disaster recovery script (`scripts/restore-db.sh`), zero-downtime deployment script (`scripts/deploy.sh`), and comprehensive deployment documentation (`DEPLOYMENT.md`).
    - Live accessibility verified: all core pages (Landing, Login, Register, Dashboard, Setup, Preview, and Public Site) load cleanly over HTTP with zero errors.
-   - **159 automated tests** with **934 assertions**, all passing (100% green).
+   - **162 automated tests** with **962 assertions**, all passing (100% green).
    - Multi-Business Real Demonstration: fully seeded with two live production websites:
      - **Patil Traditional Spices & Foods**: `http://127.0.0.1:8000/sites/patil-traditional-spices`
      - **Dr. Kulkarni Ayurvedic Wellness Clinic**: `http://127.0.0.1:8000/sites/dr-kulkarni-ayurveda`
