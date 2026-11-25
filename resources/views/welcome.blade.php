@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full bg-slate-50">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full bg-slate-50 scroll-smooth">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -268,7 +268,8 @@
         </section>
 
         <!-- Service Architecture Section -->
-        <section id="architecture" class="py-16 bg-white border-b border-slate-200">
+        <section id="architecture" class="py-16 bg-white border-b border-slate-200 scroll-mt-16 relative">
+            <span id="services" class="absolute -top-16"></span>
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="max-w-2xl">
                     <span class="text-xs font-bold uppercase tracking-wider text-blue-600">Modular MVC Architecture</span>
